@@ -1,0 +1,129 @@
+.mainContainer {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    gap: 30px;
+    width: 100vw;
+    height: 100vh;
+}
+
+.plataformInfoContainer {
+    display: grid;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #344CB7;
+    padding: 20px;
+    width: 100%;
+    height: 100vh;
+}
+.loginIcon {
+    width: 300px;
+}
+
+.authContainer {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 85%;
+    height: 100%;
+    gap: 8px;
+    padding: 50px;
+    background-color: #ffffff;
+    
+}
+
+.googleAuth {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid silver;
+    padding: 8px;
+    border-radius: 8px;
+    width: 100%;
+    height: 50px;
+}
+.googleAuth img {
+    width: 60px;
+}
+
+.mainContainer img {
+    width: 60px;
+}
+
+.emailInput {
+    outline: none;
+    border: 1px solid silver;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.emailInput:hover {
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+}
+
+.passwordInput {
+    display: flex;
+    align-items: center;
+    border: 1px solid silver;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.passwordInput:hover {
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+}
+
+.passwordInput input {
+    outline: none;
+    border: none;
+    width: 100%;
+}
+
+.authenticator {
+    width: 100%;
+    background-color: #009D43;
+    color: #fff;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.authenticator:hover {
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+}
+
+.plataformInfoContainer .loginIcon {
+    width: 400px;
+}
+
+.helpBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    border-radius: 20px;
+    padding: 8px;
+    gap: 8px;
+    background-color: #609442;
+    width: 80px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.sendOtp {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@media (max-width: 776px) {
+    .plataformInfoContainer {
+        display: none;
+    }
+    .authContainer {
+        padding: 40px;
+        margin-bottom: 30px;
+        width: 100%;
+    }
+}

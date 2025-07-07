@@ -1,0 +1,5 @@
+{
+    "ltex.additionalRules.motherTongue": "pt-PT",
+    "ltex.additionalRules.languageModel": "\"ltex.language\": \"pt-BR\"",
+    "ltex.additionalRules.enablePickyRules": true
+}

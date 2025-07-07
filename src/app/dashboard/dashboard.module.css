@@ -1,0 +1,12 @@
+.dashboard {
+    display: grid;
+    gap: 20px;
+    padding: 20px 50px;
+}
+
+
+@media screen and (max-width: 600px) {
+    .dashboard {
+        padding: 0;
+    }
+}
