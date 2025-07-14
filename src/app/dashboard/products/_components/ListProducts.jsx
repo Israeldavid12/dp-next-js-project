@@ -56,7 +56,7 @@ export default function ListProducts() {
                     });
 
                     if (Array.isArray(req.data?.product) && req.data.product.length > 0) {
-                        setProducts(req.data.product);
+                        setProducts(req.data.products);
                         setLoading(false)
                     } else {
                         setProducts([]);
