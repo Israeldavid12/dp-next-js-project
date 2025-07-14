@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import WithdrawPopUp from './_components/WithdrawModal'
 import { Loading } from "../_components/LoadindAnim"
+import { Search } from "lucide-react";
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+
+
 
 const StatusVIew = ({ status }) => {
     console.log(status)
@@ -110,17 +114,17 @@ export default function Withdraw() {
 
     const handleWithdraw = async () => {
         try {
-            const req1 = axios.get('http://localhost:4000/api/withdraw/all', {
+            const req1 = axios.get(apiUrl + '/api/withdraw/all', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             })
-            const req2 = axios.get('http://localhost:4000/api/user/summary-status', {
+            const req2 = axios.get(apiUrl + '/api/user/summary-status', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
-            const req3 = axios.get('http://localhost:4000/api/payouts-methods/all', {
+            const req3 = axios.get(apiUrl + '/api/payouts-methods/all', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -185,9 +189,19 @@ export default function Withdraw() {
             )
                 :
                 (
-                    <p className="text-center font-[600] text-[18px]" >
-                        Nenhum registro encontrado
-                    </p>
+                    <div className="flex flex-col items-center py-12 px-6">
+                        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                            <Search className="w-6 h-6 text-blue-600" />
+                        </div>
+
+                        <p className="text-lg font-semibold text-gray-700 mb-2">
+                            Nenhum saque encontrado
+                        </p>
+
+                        <p className="text-sm text-gray-500 text-center">
+                            Tente ajustar os filtros de pesquisa
+                        </p>
+                    </div>
                 )
             }
         </div>

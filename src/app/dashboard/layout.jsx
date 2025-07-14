@@ -9,6 +9,7 @@ import { Suspense, useRef, useState, useEffect } from 'react';
 import MobileMenu from './_components/MobileMenu';
 import axios from 'axios';
 import useUserId from '../hooks/useUserId'
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 
 
@@ -23,7 +24,7 @@ export default function DashboardLayout({ children }) {
     useEffect(() => {
         if (isAuthenticated) {
             const token = localStorage.getItem('sessionToken')
-            axios.get("http://localhost:4000/api/user/personal/data", {
+            axios.get(apiUrl+"/api/user/personal/data", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }

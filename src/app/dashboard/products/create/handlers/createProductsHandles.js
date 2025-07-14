@@ -1,4 +1,5 @@
 import axios from "axios";
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 
 
@@ -15,7 +16,7 @@ export async function handleCreateProduct(formData, assets, accessUrl) {
             BannerUrl: assets.banner.url,
             accessUrl: accessUrl,
         }
-        const req = await axios.post('http://localhost:4000/api/products/create', { ...payload }, {
+        const req = await axios.post(apiUrl+'/api/products/create', { ...payload }, {
             headers: {
                 Authorization: `Bearer ${token}`
             }

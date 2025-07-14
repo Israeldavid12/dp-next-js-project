@@ -1,174 +1,298 @@
 'use client'
+
 import mpesaicon from '../../../../../public/images/mpesa.png'
 import emolaicon from '../../../../../public/images/emola.png'
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
-import { useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation"
 import axios from 'axios'
 import useUserId from '../../../hooks/useUserId'
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
-
-
+const PAYMENT_METHODS = {
+    MPESA: 'Mpesa',
+    EMOLA: 'eMola'
+}
 
 export default function Payout() {
-    const [type, setType] = useState(null)
+    const [selectedType, setSelectedType] = useState(null)
+    const [formData, setFormData] = useState({
+        account_holder: '',
+        account_id: ''
+    })
+    const [response, setResponse] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
+    const [errors, setErrors] = useState({})
+    
     const searchParams = useSearchParams()
     const holder = searchParams.get('holder')
     const acc_id = searchParams.get('acc_id')
     const methodId = searchParams.get('methodId')
-    const [count, setCount] = useState(null)
     const method_type = searchParams.get('type')
-    const [response, setResponse] = useState(null)
-    const [account_holder, setHolder] = useState(null)
-    const [account_id, setAccId] = useState(null)
-    const isFirstRender = useRef(true);
+    
+    const isFirstRender = useRef(true)
     const userId = useUserId()
 
-
+    // Initialize form data and payment type
     useEffect(() => {
-        if (method_type && method_type.toLowerCase() === 'mpesa') {
-            setType('Mpesa')
+        if (method_type) {
+            const type = method_type.toLowerCase() === 'mpesa' ? PAYMENT_METHODS.MPESA : PAYMENT_METHODS.EMOLA
+            setSelectedType(type)
         }
-        if (method_type && method_type.toLowerCase() === 'emola') {
-            setType('eMola')
+        
+        if (holder || acc_id) {
+            setFormData({
+                account_holder: holder || '',
+                account_id: acc_id || ''
+            })
         }
+    }, [method_type, holder, acc_id])
 
-    }, [])
-
-
-    useEffect(() => {
-        if (isFirstRender.current) {
-            isFirstRender.current = false;
-            return;
+    const validateForm = () => {
+        const newErrors = {}
+        
+        if (!formData.account_holder.trim()) {
+            newErrors.account_holder = 'Nome do titular é obrigatório'
         }
+        
+        if (!formData.account_id.trim()) {
+            newErrors.account_id = 'Número da conta é obrigatório'
+        }
+        
+        setErrors(newErrors)
+        return Object.keys(newErrors).length === 0
+    }
 
-        async function handlePayoutsRequest() {
-            try {
-                const payload = {
-                    reqType: 'upadate/create/payoutmethos',
-                    data: {
-                        type: method_type ? 'update' : 'create',
-                        userId: userId,
-                        method_type: type,
-                        account_holder: account_holder,
-                        account_id: account_id,
-                        methodId: methodId,
-                    }
-                }
-                const req = await axios.post('https://monsterbot.vercel.app/api/user', payload)
-                console.log(req?.data)
-                if (req?.data) {
-                    setResponse(req?.data?.message)
-                }
+    const handleInputChange = (field, value) => {
+        setFormData(prev => ({
+            ...prev,
+            [field]: value
+        }))
+        
+        // Clear error when user starts typing
+        if (errors[field]) {
+            setErrors(prev => ({
+                ...prev,
+                [field]: ''
+            }))
+        }
+    }
 
-            } catch (e) {
-                console.log(e)
-                // setResponse(e.message)
+    const handleSubmit = async () => {
+        if (!validateForm()) return
+
+        setIsLoading(true)
+        setResponse(null)
+
+        try {
+            const payload = {
+                    method_type: selectedType,
+                    account_holder: formData.account_holder,
+                    account_id: formData.account_id,
+                    methodId: methodId,
             }
+            
+            const req = await axios.post(apiUrl+'/api/payouts-methods/update', payload)
+            
+            if (req?.data) {
+                setResponse({
+                    type: 'success',
+                    message: req.data.message || 'Informações salvas com sucesso!'
+                })
+            }
+        } catch (error) {
+            console.error('Erro ao salvar:', error)
+            setResponse({
+                type: 'error',
+                message: 'Erro ao salvar informações. Tente novamente.'
+            })
+        } finally {
+            setIsLoading(false)
         }
-        handlePayoutsRequest()
+    }
 
-    }, [count])
+    const PaymentMethodCard = ({ type, icon, isSelected, onClick }) => (
+        <div
+            onClick={onClick}
+            className={`
+                relative cursor-pointer rounded-lg border-2 p-4 transition-all duration-200
+                ${isSelected 
+                    ? 'border-blue-500 bg-blue-50 shadow-md' 
+                    : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                }
+            `}
+        >
+            <Image 
+                alt={`${type} icon`} 
+                className="w-16 h-16 object-contain mx-auto" 
+                src={icon} 
+            />
+            <p className="text-center mt-2 text-sm font-medium text-gray-700">{type}</p>
+            {isSelected && (
+                <div className="absolute top-2 right-2">
+                    <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
+                        <i className="bi bi-check text-white text-xs"></i>
+                    </div>
+                </div>
+            )}
+        </div>
+    )
 
+    const FormInput = ({ label, value, onChange, type = "text", error }) => (
+        <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+                {label} <span className="text-red-500">*</span>
+            </label>
+            <input
+                type={type}
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className={`
+                    w-full px-3 py-2 border rounded-md shadow-sm transition-colors
+                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+                    ${error ? 'border-red-300 bg-red-50' : 'border-gray-300'}
+                `}
+                placeholder={`Digite ${label.toLowerCase()}`}
+            />
+            {error && (
+                <p className="text-sm text-red-600 flex items-center gap-1">
+                    <i className="bi bi-exclamation-circle"></i>
+                    {error}
+                </p>
+            )}
+        </div>
+    )
 
+    const AlertMessage = ({ type, message }) => (
+        <div className={`
+            p-4 rounded-lg border-l-4 
+            ${type === 'success' 
+                ? 'bg-green-50 border-green-400 text-green-800' 
+                : 'bg-red-50 border-red-400 text-red-800'
+            }
+        `}>
+            <div className="flex items-center gap-2">
+                <i className={`bi ${type === 'success' ? 'bi-check-circle' : 'bi-exclamation-triangle'}`}></i>
+                <p className="text-sm font-medium">{message}</p>
+            </div>
+        </div>
+    )
 
+    const isFormValid = formData.account_holder.trim() && formData.account_id.trim()
 
     return (
-        <div className="grid sm:flex sm:p-8 p-4 " >
-            <div className="grid  gap-6 bg-white rounded-md w-full p-9" >
-                <div>
-                    <p className="font-bold text-[18px] text-[#000] " >Métodos de pagamentos</p>
-                    <br />
+        <div className="min-h-screen bg-gray-50 p-4 sm:p-8">
+            <div className="max-w-2xl mx-auto">
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sm:p-8">
+                    {/* Header */}
+                    <div className="mb-8">
+                        <div className="flex items-center gap-3 mb-4">
+                            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i className="bi bi-credit-card text-blue-600"></i>
+                            </div>
+                            <h1 className="text-xl font-semibold text-gray-900">
+                                Métodos de Pagamento
+                            </h1>
+                        </div>
+                        
+                        <p className="text-sm text-gray-600 leading-relaxed">
+                            Atualize ou adicione um novo método de pagamento.<br />
+                            <strong>Nota:</strong> Você pode adicionar até 3 formas de pagamento à sua conta.
+                        </p>
+                    </div>
+
+                    {/* Success/Error Messages */}
                     {response && (
-                        <div className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-                            {response}
+                        <div className="mb-6">
+                            <AlertMessage type={response.type} message={response.message} />
                         </div>
                     )}
-                    <p className="text-[11px] text-[#292929]  " >Atualize ou adicione um novo metodo de pgamentp <br />
-                        NB: Você pode adicionar até 3 formas de pagamento à sua conta.</p>
-                </div>
 
-                <div className='flex  gap-4 p-2' >
-                    <Image alt='image' onClick={() => setType('Mpesa')} className={`w-15 h-15 rounded-md
-                        ${type === "Mpesa" ? " ring-2 ring-blue-300 opacity-60 " : ""}`} src={mpesaicon} />
-
-
-                    <Image onClick={() => setType('eMola')} className={`w-15 h-15 rounded-md 
-                         ${type === "eMola" ? " ring-2 ring-blue-300 opacity-60 " : ""}`} src={emolaicon} />
-                    {/* <Image className='w-15 h-15 rounded-md'  src={mpesaicon}  /> */}
-                </div>
-
-                {type === 'Mpesa' && (
-                    <>
-
-                        <div className='sm:flex grid justify-between w-full gap-6 ' >
-                            <div className='w-full' >
-                                <p>Numero Mpesa *</p>
-                                <input onChange={(e) => setAccId(e.target.value)} id='account_id' defaultValue={acc_id || ''} className='outline-none text-md px-2 py-2 rounded-md ring-1 ring-[silver] 
-             hover:ring-blue-500 w-full' type="number" />
-                            </div>
-                            <div className='w-full' >
-                                <p>Nome do Titular *</p>
-                                <input onChange={(e) => setHolder(e.target.value)} id='holder' defaultValue={holder || ''} className='outline-none text-md px-2 py-2 rounded-md ring-1 ring-[silver] 
-             hover:ring-blue-500 w-full' type="text" />
-                            </div>
-
+                    {/* Payment Method Selection */}
+                    <div className="mb-8">
+                        <h2 className="text-lg font-medium text-gray-900 mb-4">
+                            Selecione o método de pagamento
+                        </h2>
+                        <div className="grid grid-cols-2 gap-4">
+                            <PaymentMethodCard
+                                type={PAYMENT_METHODS.MPESA}
+                                icon={mpesaicon}
+                                isSelected={selectedType === PAYMENT_METHODS.MPESA}
+                                onClick={() => setSelectedType(PAYMENT_METHODS.MPESA)}
+                            />
+                            <PaymentMethodCard
+                                type={PAYMENT_METHODS.EMOLA}
+                                icon={emolaicon}
+                                isSelected={selectedType === PAYMENT_METHODS.EMOLA}
+                                onClick={() => setSelectedType(PAYMENT_METHODS.EMOLA)}
+                            />
                         </div>
-                        <p className="text-[11px] text-[silver[ " >Ao salvar essas informacoes garante que as mesmas sao verdairas e tem o total resposabilizacao em caso de houver alguma incoformidade entre os dados.</p>
-                        {account_holder && account_id ? (
-                            <button onClick={() => setCount(count + 1)} className='text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs px-5 py-4 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800 sm:w-100' >
-                                Salvar Informações
-                            </button>
-                        )
-                            :
-                            (
-                                <button className='text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs px-5 py-4 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800 sm:w-100 opacity-70' disabled>
-                                    Salvar Informações
+                    </div>
+
+                    {/* Form Fields */}
+                    {selectedType && (
+                        <div className="space-y-6">
+                            <h2 className="text-lg font-medium text-gray-900">
+                                Informações da Conta {selectedType}
+                            </h2>
+                            
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                <FormInput
+                                    label={`Número ${selectedType}`}
+                                    value={formData.account_id}
+                                    onChange={(value) => handleInputChange('account_id', value)}
+                                    type="number"
+                                    error={errors.account_id}
+                                />
+                                
+                                <FormInput
+                                    label="Nome do Titular"
+                                    value={formData.account_holder}
+                                    onChange={(value) => handleInputChange('account_holder', value)}
+                                    error={errors.account_holder}
+                                />
+                            </div>
+
+                            {/* Terms */}
+                            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                                <div className="flex items-start gap-3">
+                                    <i className="bi bi-info-circle text-yellow-600 mt-0.5"></i>
+                                    <p className="text-sm text-yellow-800">
+                                        Ao salvar essas informações, você garante que as mesmas são verdadeiras 
+                                        e assume total responsabilidade em caso de inconformidade entre os dados.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Submit Button */}
+                            <div className="flex justify-end">
+                                <button
+                                    onClick={handleSubmit}
+                                    disabled={!isFormValid || isLoading}
+                                    className={`
+                                        flex items-center gap-2 px-6 py-3 rounded-lg font-medium text-sm transition-all
+                                        ${isFormValid && !isLoading
+                                            ? 'bg-green-600 text-white hover:bg-green-700 shadow-sm hover:shadow-md'
+                                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                        }
+                                    `}
+                                >
+                                    {isLoading ? (
+                                        <>
+                                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                            Salvando...
+                                        </>
+                                    ) : (
+                                        <>
+                                            <i className="bi bi-check-lg"></i>
+                                            Salvar Informações
+                                        </>
+                                    )}
                                 </button>
-                            )
-                        }
-
-
-                    </>
-
-                )
-                }
-                {type === 'eMola' && (
-                    <>
-
-                        <div className='sm:flex grid justify-between w-full gap-6 ' >
-                            <div className='w-full' >
-                                <p>Numero eMola *</p>
-                                <input onChange={(e) => setAccId(e.target.value)} id='account_id' defaultValue={acc_id || ''} className='outline-none text-md px-2 py-2 rounded-md ring-1 ring-[silver] 
-            hover:ring-blue-500 w-full' type="number" />
                             </div>
-                            <div className='w-full' >
-                                <p>Nome do Titular *</p>
-                                <input onChange={(e) => setHolder(e.target.value)} id='holder' defaultValue={holder || ''} className='outline-none text-md px-2 py-2 rounded-md ring-1 ring-[silver] 
-            hover:ring-blue-500 w-full' type="text" />
-                            </div>
-
                         </div>
-                        <p className="text-[11px] text-[silver[ " >Ao salvar essas informacoes garante que as mesmas sao verdairas e tem o total resposabilizacao em caso de houver alguma incoformidade entre os dados.</p>
-                        {account_holder && account_id ? (
-                            <button onClick={() => setCount(count + 1)} className='text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs px-5 py-4 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800 sm:w-100' >
-                                Salvar Informações
-                            </button>
-                        )
-                            :
-                            (
-                                <button className='text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-xs px-5 py-4 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 focus:outline-none dark:focus:ring-green-800 sm:w-100 opacity-70' disabled>
-                                    Salvar Informações
-                                </button>
-                            )
-                        }
-
-                    </>
-                )}
-
-
-
-
+                    )}
+                </div>
             </div>
         </div>
     )

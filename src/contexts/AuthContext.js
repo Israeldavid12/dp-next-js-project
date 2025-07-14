@@ -1,5 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+
 
 export const AuthContext = createContext();
 
@@ -19,7 +21,7 @@ export const AuthProvider = ({ children }) => {
 
       try {
         // exemplo de validação simples: pedir dados do usuário usando o token
-        const res = await axios.get("http://localhost:4000/api/user/personal/data", {
+        const res = await axios.get(apiUrl+"/api/user/personal/data", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(res.data);

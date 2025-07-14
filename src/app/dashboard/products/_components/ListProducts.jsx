@@ -5,7 +5,7 @@ import { Loading } from '../../_components/LoadindAnim'
 import styles from './product-grid.module.css'
 import axios from 'axios'
 import useUserId from '../../../hooks/useUserId'
-
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL
 
 
 const ProductStatus = ({ status }) => {
@@ -24,14 +24,14 @@ const ProductStatus = ({ status }) => {
     }
 }
 
-const SendReview = ({id}) => {
+const SendReview = ({ id }) => {
 
     return (
         <div>
             Solicitar revisao
         </div>
     )
-    
+
 }
 
 
@@ -49,9 +49,10 @@ export default function ListProducts() {
 
                 if (userId) {
                     setLoading(true)
-                    const req = await axios.post('https://monsterbot.vercel.app/api/products', {
-                        reqType: "get/products",
-                        userId: userId
+                    const req = await axios.get(apiUrl+'/api/products/all',{
+                        headers: {
+                            Authorization: `Bearer ${localStorage.getItem('sessionToken')}`
+                        }
                     });
 
                     if (Array.isArray(req.data?.product) && req.data.product.length > 0) {
@@ -112,9 +113,23 @@ export default function ListProducts() {
                         ))
                     )
                         : (
-                            <p className="text-center font-[600] text-[16px]">
-                                NENHUM PRODUTO ENCONTRADO
-                            </p>
+                            <div className="flex flex-col items-center justify-center py-12 px-4">
+                                <div className="mb-4">
+                                    <i className="bi bi-box text-4xl text-gray-400 dark:text-gray-500"></i>
+                                </div>
+
+                                <p className="text-center font-semibold text-gray-700 dark:text-gray-300 text-lg mb-6">
+                                    NENHUM PRODUTO ENCONTRADO
+                                </p>
+
+                                <a
+                                    href="/dashboard/products/select/"
+                                    className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 shadow-md hover:shadow-lg"
+                                >
+                                    <i className="bi bi-plus-circle"></i>
+                                    Criar Produto
+                                </a>
+                            </div>
                         )
                     }
 

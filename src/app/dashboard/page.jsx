@@ -9,6 +9,7 @@ import SalesChart from './_components/SalesChart'
 import FinancesStatus from './_components/FinancesStatus'
 import { Suspense, useEffect, useState } from 'react';
 import { Loading } from './_components/LoadindAnim'
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 
 
@@ -27,19 +28,19 @@ function DasboardPage() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const summaryReq = axios.get("http://localhost:4000/api/user/summary-status", {
+        const summaryReq = axios.get(apiUrl+"/api/user/summary-status", {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
 
-        const userReq = axios.get("http://localhost:4000/api/user/personal/data", {
+        const userReq = axios.get(apiUrl+"/api/user/personal/data", {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
 
-        const salesReq = axios.get("http://localhost:4000/api/user/sales", {
+        const salesReq = axios.get(apiUrl+"/api/user/sales", {
           headers: {
             Authorization: `Bearer ${token}`
           }

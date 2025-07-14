@@ -4,7 +4,7 @@ import { Loading } from '../../../_components/LoadindAnim'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import useUserId from "../../../../hooks/useUserId";
-
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 
 export default function DelelePayout() {
@@ -17,9 +17,7 @@ export default function DelelePayout() {
         console.log(id)
         async function handleDelete() {
             try {
-                const req = await axios.post('https://monsterbot.vercel.app/api/user', {
-                    reqType: 'delete/payout/method',
-                    userId: userId,
+                const req = await axios.post(apiUrl+'/api/payouts-methods/delete', {
                     id: id
                 });
                 setResponse(req?.data?.message)

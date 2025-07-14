@@ -13,7 +13,7 @@ export default function RecoverPassword() {
         const email = e.target.email.value;
 
         try {
-            const res = await axios.post('https://mozbuyit30.vercel.app/api/auth/request-reset', {
+            const res = await axios.post('https://auth.droopay.com/api/auth/request-reset', {
                 email,
             });
 

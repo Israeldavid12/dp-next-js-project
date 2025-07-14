@@ -26,7 +26,7 @@ export default function Login() {
 
     try {
       setIsLoading(true)
-      const req = await axios.post('https://mozbuyit30.vercel.app/api/auth/signin', {
+      const req = await axios.post('https://auth.droopay.com/api/auth/signin', {
         email,
         password
       });

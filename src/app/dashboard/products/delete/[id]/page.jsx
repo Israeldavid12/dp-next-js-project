@@ -3,6 +3,7 @@ import { useParams, redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Loading } from '../../../_components/LoadindAnim';
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 
 
@@ -14,7 +15,7 @@ export default function DeleleProduct() {
     useEffect(() => {
        const handleDelele = async () => {
             try {
-                const req = await axios.post('http://localhost:4000/api/products/delete', { id }, {
+                const req = await axios.post(apiUrl+'/api/products/delete', { id }, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

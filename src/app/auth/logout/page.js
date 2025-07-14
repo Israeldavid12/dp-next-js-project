@@ -1,16 +1,18 @@
 'use client'
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 export default function LogoutPage() {
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
-    localStorage.removeItem('sessionToken');
-    router.push('/auth/login');
-  }, [router]);
+    // Garante que está no navegador
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('sessionToken')
+      router.push('/auth/login')
+    }
+  }, [])
 
-  return null;
-
+  return <p>Redirecionando...</p>
 }

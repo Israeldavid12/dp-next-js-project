@@ -5,6 +5,7 @@ import axios from "axios"
 import Spinner from "../../../../auth/login/_components/Spinner"
 import { handleCreateProduct } from "../handlers/createProductsHandles"
 import { useRouter } from "next/navigation"
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL
 
 
 
@@ -111,14 +112,15 @@ async function getAcessUrl(product_type, formData) {
 
 }
 
-async function verifyQuantity(userId) {
+async function verifyQuantity() {
     try {
-        const req = await axios.post('https://monsterbot.vercel.app/api/products', {
-            reqType: 'verify/quantity',
-            userId: userId
+        const req = await axios.post(apiUrl+'/api/products/verify-quantity', {
+            headers:{
+                Authorization:`Bearer ${localStorage.getItem('sessionToken')}`
+            }
         });
 
-        if (req.data.status === 200) return true;
+        if (req?.status === 200) return true;
 
     } catch (e) {
         console.log(e)
@@ -143,7 +145,7 @@ export default function Submit({ formData, product_type }) {
         async function Submit() {
             try {
                 setIsLoading(true)
-                const verify_ = await verifyQuantity(userId)
+                const verify_ = await verifyQuantity()
 
                 if (!verify_) throw new Error('Limite de produtos atingido');
 

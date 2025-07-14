@@ -26,7 +26,7 @@ export default function Register() {
 
     try {
       setIsLoading(true)
-      const req = await axios.post('https://mozbuyit30.vercel.app/api/auth/register', {
+      const req = await axios.post('https://auth.droopay.com/api/auth/register', {
         formData: {
           ...formData
         }

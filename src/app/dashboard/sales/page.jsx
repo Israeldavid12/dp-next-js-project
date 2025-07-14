@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import { Loading } from "../_components/LoadindAnim"
 import mpesa from '../../../../public/images/mpesa.png'
 import Image from "next/image"
+import { ShoppingCart } from "lucide-react"
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 
 
@@ -91,14 +93,14 @@ export default function SalesPage() {
     useEffect(() => {
 
         const fechData = async () => {
-            
+
             try {
-                const summaryReq = axios.get("http://localhost:4000/api/user/summary-status", {
+                const summaryReq = axios.get(apiUrl + "/api/user/summary-status", {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                const salesReq = axios.get("http://localhost:4000/api/user/sales", {
+                const salesReq = axios.get(apiUrl + "/api/user/sales", {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -114,7 +116,7 @@ export default function SalesPage() {
                 setLoad(false)
             } catch (e) {
                 console.log(e)
-                 setLoad(false)
+                setLoad(false)
             }
         }
 
@@ -146,9 +148,19 @@ export default function SalesPage() {
             )
                 :
                 (
-                    <p className="text-center font-[600] text-[18px]" >
-                        Nenhuma venda encontrada
-                    </p>
+                    <div className="flex flex-col items-center py-12 px-6">
+                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                            <ShoppingCart className="w-6 h-6 text-green-600" />
+                        </div>
+
+                        <p className="text-lg font-semibold text-gray-700 mb-2">
+                            Nenhuma venda encontrada
+                        </p>
+
+                        <p className="text-sm text-gray-500 text-center">
+                            Tente ajustar os filtros ou período de pesquisa
+                        </p>
+                    </div>
                 )
             }
 

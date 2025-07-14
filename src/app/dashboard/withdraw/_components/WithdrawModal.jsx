@@ -4,8 +4,11 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import mpesa from '../../../../../public/images/mpesa.png'
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
-function Form({ setShowPopUp, balances, responseRequest, payouts_wallets  }) {
+
+
+function Form({ setShowPopUp, balances, responseRequest, payouts_wallets }) {
     const [formData, setFormData] = useState(null)
     const [count, setCount] = useState(0)
     const [is_request, setRequest] = useState(false)
@@ -24,7 +27,7 @@ function Form({ setShowPopUp, balances, responseRequest, payouts_wallets  }) {
                     ...formData,
                 }
 
-                const req = await axios.post('http://localhost:4000/api/withdraw/request-withdraw', payload, {
+                const req = await axios.post(apiUrl + '/api/withdraw/request-withdraw', payload, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -61,7 +64,9 @@ function Form({ setShowPopUp, balances, responseRequest, payouts_wallets  }) {
     return (
         <form onSubmit={onSubmit} >
             <div className="grid gap-2" >
-                <label htmlFor="w_amount">Montante: </label>
+                <label htmlFor="w_amount" className="block text-sm font-semibold text-gray-700 mb-2">
+                    💰 Montante (MT)
+                </label>
                 <input
                     required
                     name="amount"
@@ -69,29 +74,28 @@ function Form({ setShowPopUp, balances, responseRequest, payouts_wallets  }) {
                                 no-spinner
                                 w-full  text-sm focus:outline-none outline-none p-2 focus:ring-1 focus:ring-blue-500  border-[silver] border-1 rounded-md"
                     id="w_amount" type="number" min={100} max={15000} placeholder="0.00" />
+
+                <p className="text-xs text-gray-500 flex items-center">
+                    <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                    </svg>
+                    Mínimo: 100 MT • Máximo: 15,000 MT
+                </p>
                 <div>
-                    <p>Saldo:</p>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        💳 Saldo Disponível
+                    </label>
+
                     <select className="outline-none text-[15px] w-full p-2 ring ring-[silver] rounded-md bg-white text-gray-800" name="balance_type" id="">
                         <option value="mpesa_emola">M-PESA/E-EMOLA: {balances.mpesa_emola} MT</option>
                         <option value="paypal">PAYPAL: {balances.paypal} MT</option>
                     </select>
-                    {/* 
-                    <input type="radio" name="balance_type" id="" />
-                        <Image src={mpesa} alt="mpesa" className="rounded-lg h-10 w-10" />
-                    <input type="radio" name="balance_type" id="" /> */}
-
-                    {/* <label className="flex items-center gap-2 cursor-pointer">
-                        <input type="radio" name="balance_type" value="mpesa" className="hidden peer" />
-                        <Image
-                            src={mpesa}
-                            alt="mpesa"
-                            className="rounded-lg h-10 w-10 border-2 border-transparent peer-checked:border-blue-500"
-                        />
-                    </label> */}
 
 
                 </div>
-                <p>Carterira: </p>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    🏦 Carteira de Destino
+                </label>
 
                 {payouts_wallets?.length || 0 > 0 ? (
                     <select className="outline-none text-[15px] w-full p-2 ring ring-[silver]  rounded-md bg-white text-gray-800" name="wallet_id" id="wallet" required>
@@ -110,9 +114,21 @@ function Form({ setShowPopUp, balances, responseRequest, payouts_wallets  }) {
                 }
 
 
-                <p className="text-[11px] mt-3" >
-                    Após a confirmação, será impossível reverter esta ação
-                </p>
+                {/* Warning Message */}
+                <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-2 border-amber-200 rounded-lg p-2 mt-4">
+                    <div className="flex items-center">
+                        <div className="text-amber-600  mr-3"></div>
+                        <div className="text-[11px]" >
+                            <p className="font-semibold text-amber-800 mb-1">
+                                Atenção - Ação Irreversível
+                            </p>
+                            <p className=" text-amber-700">
+                                Após a confirmação, será impossível reverter esta ação
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 <div className="flex justify-end p-4 px-1 gap-3" >
                     <button onClick={() => setShowPopUp(false)}
                         className="rounded-md bg-neutral-100 hover:bg-neutral-200 text-[13px] px-4 py-2 shadow" >Cancelar</button>
