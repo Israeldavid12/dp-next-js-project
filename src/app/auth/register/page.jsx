@@ -26,7 +26,7 @@ export default function Register() {
 
     try {
       setIsLoading(true)
-      const req = await axios.post('https://auth.droopay.com/api/auth/register', {
+      const req = await axios.post('https://auth.droopay.com/api/auth/signup', {
         formData: {
           ...formData
         }
