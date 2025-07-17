@@ -21,6 +21,35 @@ const renderMethodIcon = (method) => {
     }
 }
 
+const renderStatusColor = (status) => {
+    switch (status) {
+        case 'completed':
+            return (
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200">
+                    Concluído
+                </span>
+            );
+        case 'pending':
+            return (
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 border border-yellow-200">
+                    Pendente
+                </span>
+            );
+        case 'failed':
+            return (
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 border border-red-200">
+                    Falhou
+                </span>
+            );
+        default:
+            return (
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 border border-gray-200">
+                    Desconhecido
+                </span>
+            );
+    }
+};
+
 
 function ListSales({ sales }) {
     const [res_limit, setResLimit] = useState(10)
@@ -49,6 +78,7 @@ function ListSales({ sales }) {
                             <th className="px-4 py-3 text-gray-600 font-semibold">Montante</th>
                             <th className="px-4 py-3 text-gray-600 font-semibold">ID da transacao</th>
                             <th className="px-4 py-3 text-gray-600 font-semibold">Pagamento</th>
+                            <th className="px-4 py-3 text-gray-600 font-semibold">Estado</th>
                             <th className="px-4 py-3 text-gray-600 font-semibold">Comprador/Email</th>
                             <th className="px-4 py-3 text-gray-600 font-semibold">Comprador/Nome</th>
                             <th className="px-4 py-3 text-gray-600 font-semibold">Comprador/Celular</th>
@@ -64,6 +94,9 @@ function ListSales({ sales }) {
                                 <td className="px-4 py-2">{sale.sale_id || 'N/A'}</td>
                                 <td className="px-4 py-2">
                                     {renderMethodIcon(sale.payment_method)}
+                                </td>
+                                 <td className="px-4 py-2">
+                                    {renderStatusColor(sale.status)}
                                 </td>
                                 <td className="px-4 py-2">{sale.buyer_email || 'N/A'}</td>
                                 <td className="px-4 py-2">{sale.buyer_name || 'N/A'}</td>
@@ -88,6 +121,7 @@ export default function SalesPage() {
     const [sales, setSales] = useState([])
     const [is_load, setLoad] = useState(true)
     const [balance, setBalance] = useState(null)
+    const [salesCount, setSalesCount] = useState(0)
     const token = localStorage.getItem('sessionToken')
 
     useEffect(() => {
@@ -113,6 +147,7 @@ export default function SalesPage() {
 
                 setSales(salesRes?.data?.sales)
                 setBalance(summaryRes?.data?.balances?.mpesa_emola)
+                setSalesCount(summaryRes?.data?.balances?.total_sales || 0)
                 setLoad(false)
             } catch (e) {
                 console.log(e)
@@ -135,7 +170,7 @@ export default function SalesPage() {
             <div className=" grid  md:flex gap-4 ">
                 <div className="bg-white grid gap-2 rounded-md p-5 w-full text-[12px] shadow">
                     <p>Total de vendas realizadas <i class="bi bi-info-circle-fill"></i></p>
-                    <span id="sales-lenght" className="text-[23px]" >{sales?.length || 0}</span>
+                    <span id="sales-lenght" className="text-[23px]" >{salesCount || 0}</span>
                 </div>
                 <div className="bg-white grid -gap-2 rounded-md p-5 w-full text-[12px] shadow">
                     <p>Valor líquido <i class="bi bi-info-circle-fill"></i></p>

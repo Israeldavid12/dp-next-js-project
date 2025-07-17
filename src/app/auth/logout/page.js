@@ -14,5 +14,5 @@ export default function LogoutPage() {
     }
   }, [])
 
-  return <p>Redirecionando...</p>
+  return <p></p>
 }
