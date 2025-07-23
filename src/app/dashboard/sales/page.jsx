@@ -118,7 +118,7 @@ function ListSales({ sales, setQueryTime }) {
                                 <td className="px-4 py-2">{(sale?.buyer_name || '').slice(0, 12) || 'N/A'}</td>
                                 <td className="px-4 py-2">{sale?.buyer_phone || 'N/A'}</td>
                                 <td className="px-4 py-2">{sale?.buyer_country || 'N/A'}</td>
-                                <td className="px-4 py-2">{sale?.origin || 'N/A'}</td>
+                                <td className="px-4 py-2 text-black/70 font-bold">{sale?.origin.toUpperCase() || 'N/A'}</td>
                                 <td className="px-4 py-2">{(sale.created_at).split('T')[0] || 'N/A'}</td>
 
                             </tr>
@@ -154,7 +154,7 @@ export default function SalesPage() {
                         Authorization: `Bearer ${token}`
                     }
                 });
-                const salesReq = axios.get('http://localhost:4000/api/user/sales', {
+                const salesReq = axios.get(apiUrl+'/api/user/sales', {
                     params: {
                         query_time: query_time
                     },
