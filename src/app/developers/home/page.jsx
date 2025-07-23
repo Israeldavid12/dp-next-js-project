@@ -44,7 +44,6 @@ const Profile = () => {
     const [is_toggle, setToggle] = useState(true)
     const [data, setData] = useState([])
     const [toggles, setToggles] = useState({});
-    const token = localStorage.getItem('sessionToken')
 
     const handleToggle = (index) => {
         setToggles((prev) => ({
@@ -54,6 +53,7 @@ const Profile = () => {
     };
 
     const handleData = async () => {
+        const token = localStorage.getItem('sessionToken')
         try {
             const request = await axios.get(apiUrl + '/api/user/api-credentials', {
                 headers: {
