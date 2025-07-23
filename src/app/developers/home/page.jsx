@@ -1,6 +1,7 @@
 'use client'
 import axios from "axios";
 import { useState, useEffect } from "react";
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 
 
@@ -54,7 +55,7 @@ const Profile = () => {
 
     const handleData = async () => {
         try {
-            const request = await axios.get('http://localhost:4000/api/user/api-credentials', {
+            const request = await axios.get(apiUrl + '/api/user/api-credentials', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
