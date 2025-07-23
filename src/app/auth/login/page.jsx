@@ -35,7 +35,9 @@ export default function Login() {
       if (token) {
         localStorage.setItem('sessionToken', token)
         router.push('/dashboard');
-        setIsLoading(false)
+        setTimeout(() => {
+          setIsLoading(false)
+        }, 3000);
       }
 
     } catch (err) {
@@ -73,8 +75,10 @@ export default function Login() {
       </div>
 
       <div className={styles.authContainer}>
-        <p className="font-[700] text-[20px]">AUTENTICAR</p>
-        <p>Inicie uma sessão inserindo suas informações abaixo.</p>
+        <div>
+          <p className="font-[700] text-[20px]">AUTENTICAR</p>
+          <p>Inicie uma sessão inserindo suas informações abaixo.</p>
+        </div>
 
         <div className={styles.googleAuth} id="google-auth">
           <Image src={googleIcon} alt="Google" />

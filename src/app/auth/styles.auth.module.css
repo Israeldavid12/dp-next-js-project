@@ -25,9 +25,11 @@
     display: grid;
     justify-content: center;
     align-items: center;
+    justify-self: center;
+    align-self: center;
     width: 85%;
-    height: 100%;
-    gap: 8px;
+    height: 85%;
+    gap: 1px;
     padding: 50px;
     background-color: #ffffff;
     

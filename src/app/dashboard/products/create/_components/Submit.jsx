@@ -6,6 +6,7 @@ import Spinner from "../../../../auth/login/_components/Spinner"
 import { handleCreateProduct } from "../handlers/createProductsHandles"
 import { useRouter } from "next/navigation"
 const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL
+const token = localStorage.getItem('sessionToken')
 
 
 
@@ -27,7 +28,7 @@ async function setAssetsProduct(banner_file, image_file) {
         formDataBanner.append('file', banner_file);
         formDataBanner.append('dir', 'banners');
 
-        const URL_ENDPOINT = 'http://129.146.58.182:3080/api/upload/images';
+        const URL_ENDPOINT = 'https://file.droopay.com/api/upload/images';
 
         const req_image = axios.post(URL_ENDPOINT, formDataImage, {
             headers: {
@@ -70,11 +71,12 @@ async function setEbook(ebook_file) {
         const formData = new FormData();
         formData.append('file', ebook_file);
 
-        const URL_ENDPOINT = 'http://129.146.58.182:3080/api/upload/doc';
+        // const URL_ENDPOINT = 'https://file.droopay.com/api/upload/doc';
 
-        const response = await axios.post('http://129.146.58.182:3080/api/upload/doc', formData, {
+        const response = await axios.post('https://file.droopay.com/api/upload/docs', formData, {
             headers: {
-                'Content-Type': 'multipart/form-data'
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`
             }
         });
 
@@ -114,9 +116,9 @@ async function getAcessUrl(product_type, formData) {
 
 async function verifyQuantity() {
     try {
-        const req = await axios.post(apiUrl+'/api/products/verify-quantity', {
-            headers:{
-                Authorization:`Bearer ${localStorage.getItem('sessionToken')}`
+        const req = await axios.post(apiUrl + '/api/products/verify-quantity', {}, {
+            headers: {
+                Authorization: `Bearer ${token}`
             }
         });
 

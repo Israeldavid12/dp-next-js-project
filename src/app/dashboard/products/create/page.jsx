@@ -221,7 +221,7 @@ export default function CreateProduct() {
                             Upload do eBook
                         </label>
                         <p className="text-sm text-gray-600 mb-4">
-                            Envie arquivos de até 25 MB (.pdf)
+                            Envie arquivos de até 10 MB (.pdf)
                         </p>
 
                         <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors cursor-pointer">
