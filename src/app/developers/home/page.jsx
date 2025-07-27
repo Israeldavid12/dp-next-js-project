@@ -1,7 +1,10 @@
 'use client'
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
+import { useRouter } from "next/navigation";
 const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+
 
 
 
@@ -44,6 +47,25 @@ const Profile = () => {
     const [is_toggle, setToggle] = useState(true)
     const [data, setData] = useState([])
     const [toggles, setToggles] = useState({});
+    const [dev, setDev] = useState([])
+    const router = useRouter()
+
+
+
+    const setDevData = () => {
+        try {
+            const token = localStorage.getItem('sessionToken')
+            const decoded = jwtDecode(token)
+            setDev(decoded)
+
+        } catch (e) {
+           router.push('/auth/login')
+        }
+    }
+
+    useEffect(()=> {
+        setDevData()
+    }, [])
 
     const handleToggle = (index) => {
         setToggles((prev) => ({
@@ -115,15 +137,15 @@ const Profile = () => {
                 <div className="bg-white grid gap-3 rounded-md p-4 justify-self-start  self-start">
                     <div>
                         <p className="text-black/60 text-[12px]" >Nome</p>
-                        <input className="ring ring-[silver] rounded py-1 px-2 text-[13px]" type="text" value={'ISRAEL DAVIDE'} />
+                        <input className="ring ring-[silver] rounded py-1 px-2 text-[13px]" type="text" value={dev?.name} />
                     </div>
                     <div>
                         <p className="text-black/60 text-[12px]" >Email</p>
-                        <input className="ring ring-[silver] rounded py-1 px-2 text-[13px]" type="text" value={'israeldavide35@gmail.com'} />
+                        <input className="ring ring-[silver] rounded py-1 px-2 text-[13px]" type="text" value={dev?.email} />
                     </div>
                     <div>
                         <p className="text-black/60 text-[12px]" >Celular</p>
-                        <input className="ring ring-[silver] rounded py-1 px-2 text-[13px]" type="text" value={'8* *** 1147'} />
+                        <input className="ring ring-[silver] rounded py-1 px-2 text-[13px]" type="text" value={dev?.contact} />
                     </div>
                 </div>
 

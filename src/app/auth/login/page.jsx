@@ -41,7 +41,7 @@ export default function Login() {
       }
 
     } catch (err) {
-      console.log(err)
+     
       if (err.response) {
         setIsLoading(false)
         setError(err.response.data.message)

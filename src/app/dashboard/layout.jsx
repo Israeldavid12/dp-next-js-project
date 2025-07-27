@@ -34,7 +34,7 @@ export default function DashboardLayout({ children }) {
 
                 })
                 .catch((err) => {
-                    console.log(err);
+                   
                 });
         }
     }, [isAuthenticated]);
