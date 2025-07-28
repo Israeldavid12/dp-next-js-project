@@ -80,6 +80,7 @@ export default function Payout() {
 
     const handleSubmit = async () => {
         if (!validateForm()) return
+        const token = localStorage.getItem('sessionToken')
 
         setIsLoading(true)
         setResponse(null)
@@ -92,7 +93,13 @@ export default function Payout() {
                     methodId: methodId,
             }
             
-            const req = await axios.post(apiUrl+'/api/payouts-methods/update', payload)
+            const req = await axios.post(apiUrl+'/api/payouts-methods/update', payload, 
+                 {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
             
             if (req?.data) {
                 setResponse({

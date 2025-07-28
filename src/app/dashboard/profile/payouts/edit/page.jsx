@@ -89,6 +89,7 @@ const EditPayoutPage = () => {
 
     const handleUpdate = async (e) => {
         e.preventDefault()
+        const token = localStorage.getItem('sessionToken')
         
         if (!validateForm()) {
             setNotification({

@@ -17,8 +17,12 @@ export default function DelelePayout() {
         console.log(id)
         async function handleDelete() {
             try {
-                const req = await axios.post(apiUrl+'/api/payouts-methods/delete', {
+                const req = await axios.post(apiUrl + '/api/payouts-methods/delete', {
                     id: id
+                }, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
                 });
                 setResponse(req?.data?.message)
                 setTimeout(() => {
