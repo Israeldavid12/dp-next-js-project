@@ -5,14 +5,57 @@ import emolaicon from '../../../../../public/images/emola.png'
 import Image from 'next/image'
 import { useState, useEffect, useRef } from 'react'
 import { useSearchParams } from "next/navigation"
+import { Input } from '@/components/ui/input'
 import axios from 'axios'
 import useUserId from '../../../hooks/useUserId'
+import React from 'react'
 const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 const PAYMENT_METHODS = {
     MPESA: 'Mpesa',
     EMOLA: 'eMola'
 }
+
+
+
+
+
+
+
+ const FormInput =  React.memo(({ label, value, onChange, type = "text", error }) => (
+        <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+                {label} <span className="text-red-500">*</span>
+            </label>
+            <Input
+                type={type}
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                placeholder={`Digite ${label.toLowerCase()}`}
+                className={`
+        w-full px-3 py-2 border rounded-md shadow-sm transition-colors
+        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+        ${error ? 'border-red-300 bg-red-50' : 'border-gray-300'}
+      `}
+            />
+
+            {error && (
+                <p className="text-sm text-red-600 flex items-center gap-1">
+                    <i className="bi bi-exclamation-circle"></i>
+                    {error}
+                </p>
+            )}
+        </div>
+    ))
+
+
+
+
+
+
+
+
+
 
 export default function Payout() {
     const [selectedType, setSelectedType] = useState(null)
@@ -23,13 +66,13 @@ export default function Payout() {
     const [response, setResponse] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [errors, setErrors] = useState({})
-    
+
     const searchParams = useSearchParams()
     const holder = searchParams.get('holder')
     const acc_id = searchParams.get('acc_id')
     const methodId = searchParams.get('methodId')
     const method_type = searchParams.get('type')
-    
+
     const isFirstRender = useRef(true)
     const userId = useUserId()
 
@@ -39,7 +82,7 @@ export default function Payout() {
             const type = method_type.toLowerCase() === 'mpesa' ? PAYMENT_METHODS.MPESA : PAYMENT_METHODS.EMOLA
             setSelectedType(type)
         }
-        
+
         if (holder || acc_id) {
             setFormData({
                 account_holder: holder || '',
@@ -50,15 +93,15 @@ export default function Payout() {
 
     const validateForm = () => {
         const newErrors = {}
-        
+
         if (!formData.account_holder.trim()) {
             newErrors.account_holder = 'Nome do titular é obrigatório'
         }
-        
+
         if (!formData.account_id.trim()) {
             newErrors.account_id = 'Número da conta é obrigatório'
         }
-        
+
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0
     }
@@ -68,7 +111,7 @@ export default function Payout() {
             ...prev,
             [field]: value
         }))
-        
+
         // Clear error when user starts typing
         if (errors[field]) {
             setErrors(prev => ({
@@ -87,20 +130,20 @@ export default function Payout() {
 
         try {
             const payload = {
-                    method_type: selectedType,
-                    account_holder: formData.account_holder,
-                    account_id: formData.account_id,
-                    methodId: methodId,
+                method_type: selectedType,
+                account_holder: formData.account_holder,
+                account_id: formData.account_id,
+                methodId: methodId,
             }
-            
-            const req = await axios.post(apiUrl+'/api/payouts-methods/update', payload, 
-                 {
+
+            const req = await axios.post(apiUrl + '/api/payouts-methods/update', payload,
+                {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 }
             )
-            
+
             if (req?.data) {
                 setResponse({
                     type: 'success',
@@ -123,16 +166,16 @@ export default function Payout() {
             onClick={onClick}
             className={`
                 relative cursor-pointer rounded-lg border-2 p-4 transition-all duration-200
-                ${isSelected 
-                    ? 'border-blue-500 bg-blue-50 shadow-md' 
+                ${isSelected
+                    ? 'border-blue-500 bg-blue-50 shadow-md'
                     : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
                 }
             `}
         >
-            <Image 
-                alt={`${type} icon`} 
-                className="w-16 h-16 object-contain mx-auto" 
-                src={icon} 
+            <Image
+                alt={`${type} icon`}
+                className="w-16 h-16 object-contain mx-auto"
+                src={icon}
             />
             <p className="text-center mt-2 text-sm font-medium text-gray-700">{type}</p>
             {isSelected && (
@@ -145,36 +188,13 @@ export default function Payout() {
         </div>
     )
 
-    const FormInput = ({ label, value, onChange, type = "text", error }) => (
-        <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
-                {label} <span className="text-red-500">*</span>
-            </label>
-            <input
-                type={type}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                className={`
-                    w-full px-3 py-2 border rounded-md shadow-sm transition-colors
-                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
-                    ${error ? 'border-red-300 bg-red-50' : 'border-gray-300'}
-                `}
-                placeholder={`Digite ${label.toLowerCase()}`}
-            />
-            {error && (
-                <p className="text-sm text-red-600 flex items-center gap-1">
-                    <i className="bi bi-exclamation-circle"></i>
-                    {error}
-                </p>
-            )}
-        </div>
-    )
+   
 
     const AlertMessage = ({ type, message }) => (
         <div className={`
             p-4 rounded-lg border-l-4 
-            ${type === 'success' 
-                ? 'bg-green-50 border-green-400 text-green-800' 
+            ${type === 'success'
+                ? 'bg-green-50 border-green-400 text-green-800'
                 : 'bg-red-50 border-red-400 text-red-800'
             }
         `}>
@@ -201,7 +221,7 @@ export default function Payout() {
                                 Métodos de Pagamento
                             </h1>
                         </div>
-                        
+
                         <p className="text-sm text-gray-600 leading-relaxed">
                             Atualize ou adicione um novo método de pagamento.<br />
                             <strong>Nota:</strong> Você pode adicionar até 3 formas de pagamento à sua conta.
@@ -242,7 +262,7 @@ export default function Payout() {
                             <h2 className="text-lg font-medium text-gray-900">
                                 Informações da Conta {selectedType}
                             </h2>
-                            
+
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                 <FormInput
                                     label={`Número ${selectedType}`}
@@ -251,7 +271,7 @@ export default function Payout() {
                                     type="number"
                                     error={errors.account_id}
                                 />
-                                
+
                                 <FormInput
                                     label="Nome do Titular"
                                     value={formData.account_holder}
@@ -265,7 +285,7 @@ export default function Payout() {
                                 <div className="flex items-start gap-3">
                                     <i className="bi bi-info-circle text-yellow-600 mt-0.5"></i>
                                     <p className="text-sm text-yellow-800">
-                                        Ao salvar essas informações, você garante que as mesmas são verdadeiras 
+                                        Ao salvar essas informações, você garante que as mesmas são verdadeiras
                                         e assume total responsabilidade em caso de inconformidade entre os dados.
                                     </p>
                                 </div>

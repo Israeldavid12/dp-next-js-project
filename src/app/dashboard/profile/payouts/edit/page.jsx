@@ -214,7 +214,7 @@ const EditPayoutPage = () => {
                                 name="account_holder"
                                 type="text"
                                 placeholder="Digite o nome do titular"
-                                value={formData.account_holder}
+                                defaultValue={formData.account_holder}
                                 onChange={(e) => handleInputChange('account_holder', e.target.value)}
                                 className={`${errors.account_holder ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : ''}`}
                             />
@@ -226,7 +226,7 @@ const EditPayoutPage = () => {
                                 name="account_id"
                                 type="tel"
                                 placeholder="Digite o número da conta"
-                                value={formData.account_id}
+                                defaultValue={formData.account_id}
                                 onChange={(e) => handleInputChange('account_id', e.target.value)}
                                 className={`${errors.account_id ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : ''}`}
                             />
