@@ -8,6 +8,7 @@ import FAQSection from './_components/FAQ'
 import Footer from './_components/Footer'
 import FloatingButton from './_components/FloatSupportButton';
 import RealTimeChat from './_components/ChatSupportLabel';
+import logo from '../../public/images/logo.png'
 
 
 
@@ -26,11 +27,12 @@ function SideMenu({ isOpen, setSideMenu }) {
             ${isOpen ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'}
           `}
         >
-          <img
+
+          <Image
             className="w-16 h-16"
-            src="https://megaofertasco.store/unnamed%20(3).png"
-            alt="logo"
-          />
+            src={logo}
+            alt="logo" />
+
           <i
             onClick={() => setSideMenu(!isOpen)}
             className="bi bi-x-lg cursor-pointer text-[25px] px-6 py-3 rounded-full text-black"
@@ -52,7 +54,7 @@ function SideMenu({ isOpen, setSideMenu }) {
               <a href="https://api.whatsapp.com/send?phone=258863814050">Suporte</a>
             </li>
             <button className="hover:bg-gray-100 px-6 py-3 rounded-full login ring ring-[silver] shadow-md">
-              <a href="auth/login/">Entrar</a>
+              <a href="/auth/login/">Entrar</a>
             </button>
             <button className="hover:bg-blue-600 px-6 py-3 rounded-full signup bg-blue-700 text-white shadow-md">
               <a href="auth/register/">Criar conta</a>
@@ -148,7 +150,10 @@ export default function Home() {
     <div className="grid  transition-all duration-200" >
       <div className="flex justify-between items-center px-8 py-0 shadow-xs " >
 
-        <img className="w-16" src='https://megaofertasco.store/unnamed%20(3).png' alt="logo" />
+        <Image
+          className="w-16 h-16"
+          src={logo}
+          alt="logo" />
         <div>
           <i onClick={() => {
             const sideMenu = document.querySelector('#side_menu')
@@ -175,7 +180,7 @@ export default function Home() {
 
       <FloatingButton toggle={toggleChat} />
       <RealTimeChat isOpen={showChat} toggle={toggleChat} />
-      <Section1 /> 
+      <Section1 />
       <Section2 />
       <hr className="text-[silver] sm:mx-50 mx-20" />
       <Section3 />

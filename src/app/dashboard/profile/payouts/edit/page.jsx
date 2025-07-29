@@ -24,6 +24,45 @@ const PAYMENT_METHODS = [
     { value: 'Mpesa', label: 'M-Pesa', icon: '💳' }
 ]
 
+
+
+
+
+const FormField = ({ label, error, children }) => (
+        <div className="space-y-2">
+            <label className="block text-sm font-medium text-gray-700">
+                {label} <span className="text-red-500">*</span>
+            </label>
+            {children}
+            {error && (
+                <p className="text-sm text-red-600 flex items-center gap-1">
+                    <AlertCircle className="w-4 h-4" />
+                    {error}
+                </p>
+            )}
+        </div>
+    )
+
+
+     const Notification = ({ type, message }) => (
+        <div className={`
+            flex items-center gap-3 p-4 rounded-lg border-l-4 mb-6 transition-all duration-300
+            ${type === 'success' 
+                ? 'bg-green-50 border-green-400 text-green-800' 
+                : 'bg-red-50 border-red-400 text-red-800'
+            }
+        `}>
+            {type === 'success' ? (
+                <CheckCircle className="w-5 h-5" />
+            ) : (
+                <AlertCircle className="w-5 h-5" />
+            )}
+            <p className="text-sm font-medium">{message}</p>
+        </div>
+    )
+
+
+
 const EditPayoutPage = () => {
     const params = useSearchParams()
     const holder = params.get('holder')
@@ -138,37 +177,9 @@ const EditPayoutPage = () => {
         }
     }
 
-    const Notification = ({ type, message }) => (
-        <div className={`
-            flex items-center gap-3 p-4 rounded-lg border-l-4 mb-6 transition-all duration-300
-            ${type === 'success' 
-                ? 'bg-green-50 border-green-400 text-green-800' 
-                : 'bg-red-50 border-red-400 text-red-800'
-            }
-        `}>
-            {type === 'success' ? (
-                <CheckCircle className="w-5 h-5" />
-            ) : (
-                <AlertCircle className="w-5 h-5" />
-            )}
-            <p className="text-sm font-medium">{message}</p>
-        </div>
-    )
+   
 
-    const FormField = ({ label, error, children }) => (
-        <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
-                {label} <span className="text-red-500">*</span>
-            </label>
-            {children}
-            {error && (
-                <p className="text-sm text-red-600 flex items-center gap-1">
-                    <AlertCircle className="w-4 h-4" />
-                    {error}
-                </p>
-            )}
-        </div>
-    )
+    
 
     return (
         <div className="min-h-screen bg-gray-50 p-4 sm:p-6">
