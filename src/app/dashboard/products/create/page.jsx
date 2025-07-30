@@ -215,36 +215,40 @@ export default function CreateProduct() {
                     )}
 
                     {/* Upload de eBook */}
-                    <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-                        <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-3">
-                            <Upload className="w-4 h-4" />
-                            Upload do eBook
-                        </label>
-                        <p className="text-sm text-gray-600 mb-4">
-                            Envie arquivos de até 10 MB (.pdf)
-                        </p>
+                    {productType.toLowerCase() === 'ebook' && (
+                        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                            <label className="flex items-center gap-2 text-sm font-medium text-gray-700 mb-3">
+                                <Upload className="w-4 h-4" />
+                                Upload do eBook
+                            </label>
+                            <p className="text-sm text-gray-600 mb-4">
+                                Envie arquivos de até 10 MB (.pdf)
+                            </p>
 
-                        <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors cursor-pointer">
-                            <input
-                                name="ebook_field"
-                                id="ebook_field"
-                                type="file"
-                                accept="application/pdf"
-                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
-                                onChange={handleFileChange}
-                                required
-                            />
+                            <div className="relative border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors cursor-pointer">
+                                <input
+                                    name="ebook_field"
+                                    id="ebook_field"
+                                    type="file"
+                                    accept="application/pdf"
+                                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
+                                    onChange={handleFileChange}
+                                    required
+                                />
 
-                            <div className="pointer-events-none">
-                                <FileText className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                                <p className="text-sm text-gray-600">
-                                    {selectedFile
-                                        ? `Arquivo selecionado: ${selectedFile.name}`
-                                        : "Clique para enviar ou arraste o arquivo aqui"}
-                                </p>
+                                <div className="pointer-events-none">
+                                    <FileText className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                                    <p className="text-sm text-gray-600">
+                                        {selectedFile
+                                            ? `Arquivo selecionado: ${selectedFile.name}`
+                                            : "Clique para enviar ou arraste o arquivo aqui"}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    )}
+
+
 
 
 
