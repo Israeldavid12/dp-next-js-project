@@ -19,7 +19,7 @@ export default function ResetPassword() {
         }
         try {
             setLoading(true)
-            const res = await axios.post('https://mozbuyit30.vercel.app/api/auth/reset', {
+            const res = await axios.post('https://auth.droopay.com/api/auth/reset', {
                 password,
                 token,
             });
