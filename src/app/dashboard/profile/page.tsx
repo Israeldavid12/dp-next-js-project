@@ -50,7 +50,8 @@ function ProfilePage() {
 
     }, [token])
 
-    const handleSaveData = async (req, res) => {
+    const handleSaveData = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         try {
             setChange(false)
             setRes(null)
@@ -79,7 +80,7 @@ function ProfilePage() {
 
     const handleName = (e) => {
         setChange(true)
-        setForm({ ...form, name: e.target.value })
+        setForm([{ ...form[0], name: e.target.value }])
         if ((e.target.value).length > 100) {
             e.target.classList.remove('hover:ring-blue-500');
             e.target.classList.add('hover:ring-red-500');
@@ -89,7 +90,7 @@ function ProfilePage() {
     }
     const handleId = (e) => {
         setChange(true)
-        setForm({ ...form, national_id: e.target.value })
+        setForm([{ ...form[0], national_id: e.target.value }])
         if ((e.target.value).length > 100) {
             e.target.classList.remove('hover:ring-blue-500');
             e.target.classList.add('hover:ring-red-500');
@@ -98,7 +99,7 @@ function ProfilePage() {
     }
     const handleContact = (e) => {
         setChange(true)
-        setForm({ ...form, contact: e.target.value })
+        setForm([{ ...form[0], contact: e.target.value }])
         if ((e.target.value).length > 100) {
             e.target.classList.remove('hover:ring-blue-500');
             e.target.classList.add('hover:ring-red-500');

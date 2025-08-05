@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { useState, useEffect, useRef } from 'react';
 import ImageUploadPreview from './_components/PreviewImage'
 import { redirect } from 'next/navigation';
@@ -44,13 +44,15 @@ export default function CreateProduct() {
 
     const searchParams = useSearchParams();
     const productType = searchParams.get('p_type');
-    if (productType) {
-        useEffect(() => {
+    useEffect(() => {
+        const productType = searchParams.get('p_type');
+
+        if (productType) {
             setType(productType);
-        }, [productType]); // Executa apenas quando productType mudar
-    } else {
-        redirect('/dashboard/products')
-    }
+        } else {
+            redirect('/dashboard/products');
+        }
+    }, [searchParams]);
 
     function handlePrice(e) {
         setPrice(e.target.value)

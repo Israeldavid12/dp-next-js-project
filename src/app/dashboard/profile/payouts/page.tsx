@@ -17,11 +17,6 @@ const PAYMENT_METHODS = {
 }
 
 
-
-
-
-
-
 type FormInputProps = {
     label: string;
     value: string;
