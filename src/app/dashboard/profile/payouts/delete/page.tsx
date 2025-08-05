@@ -16,6 +16,7 @@ export default function DelelePayout() {
     useEffect(() => {
         console.log(id)
         async function handleDelete() {
+            const token = localStorage.getItem('sessionToken')
             try {
                 const req = await axios.post(apiUrl + '/api/payouts-methods/delete', {
                     id: id

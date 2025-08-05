@@ -27,7 +27,7 @@ export default function EditProduct() {
   const [is_active, setActive] = useState(false)
   const [response, setResponse] = useState(null);
   const params = useParams();
-  const id = params.id;
+  const id = Array.isArray(params.id) ? params.id[0] : params.id;
   const router = useRouter()
   const [loading, setLoading] = useState(true)
   const [is_save, setSave] = useState(false)
@@ -180,7 +180,7 @@ export default function EditProduct() {
                     defaultValue={p_data.description}
                     maxLength={700}
                     className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all hover:border-gray-400 resize-none"
-                    rows="4"
+                    rows={4}
                     placeholder="Descreva as características do produto..."
                   />
                 </div>

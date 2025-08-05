@@ -63,6 +63,23 @@ const FormField = ({ label, error, children }) => (
 
 
 
+type FormData = {
+    account_holder: string;
+    account_id: string;
+    method_type: string;
+};
+
+type Errors = {
+    account_holder?: string;
+    account_id?: string;
+    method_type?: string;
+};
+
+type NotificationType = {
+    type: 'success' | 'error';
+    message: string;
+};
+
 const EditPayoutPage = () => {
     const params = useSearchParams()
     const holder = params.get('holder')
@@ -70,16 +87,16 @@ const EditPayoutPage = () => {
     const methodId = params.get('id')
     const currentType = params.get('type')
     
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<FormData>({
         account_holder: holder || '',
         account_id: acc_id || '',
         method_type: currentType || ''
     })
     const [isSaving, setIsSaving] = useState(false)
-    const [errors, setErrors] = useState({})
-    const [notification, setNotification] = useState(null)
+    const [errors, setErrors] = useState<Errors>({})
+    const [notification, setNotification] = useState<NotificationType | null>(null)
     
-    const token = localStorage.getItem('sessionToken')
+    const token = typeof window !== "undefined" ? localStorage.getItem('sessionToken') : null
     const router = useRouter()
 
     // Auto-hide notification after 5 seconds
@@ -93,7 +110,7 @@ const EditPayoutPage = () => {
     }, [notification])
 
     const validateForm = () => {
-        const newErrors = {}
+        const newErrors: Errors = {}
         
         if (!formData.account_holder.trim()) {
             newErrors.account_holder = 'Nome do titular é obrigatório'

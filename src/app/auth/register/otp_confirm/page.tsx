@@ -65,7 +65,7 @@ export default function OtpConfirm() {
 
         } else if (error) {
             console.log('falha ao obter o id')
-            setError(error)
+            setError(error.message)
             return
         }
     }

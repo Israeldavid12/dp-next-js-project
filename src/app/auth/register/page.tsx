@@ -13,6 +13,9 @@ export default function Register() {
   const [error, setError] = useState(null);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleRegister = async (e) => {
     e.preventDefault()
@@ -92,7 +95,7 @@ export default function Register() {
               type="text"
               id="name"
               name='name'
-              maxLength="100"
+              maxLength={100}
               onChange={(e) => setName(e.target.value)}
               required
             />
@@ -105,7 +108,7 @@ export default function Register() {
               type="email"
               id="email"
               name='email'
-              maxLength="100"
+              maxLength={100}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -118,7 +121,7 @@ export default function Register() {
                 type="password"
                 id="password"
                 name='password'
-                maxLength="100"
+                maxLength={100}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />

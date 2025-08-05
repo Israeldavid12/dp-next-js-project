@@ -47,9 +47,14 @@ const Profile = () => {
     const [is_toggle, setToggle] = useState(true)
     const [data, setData] = useState([])
     const [toggles, setToggles] = useState({});
-    const [dev, setDev] = useState([])
+    interface Dev {
+        name?: string;
+        email?: string;
+        contact?: string;
+        [key: string]: any;
+    }
+    const [dev, setDev] = useState<Dev>({})
     const router = useRouter()
-
 
 
     const setDevData = () => {
@@ -111,7 +116,7 @@ const Profile = () => {
                                 <span className="font-[500] " >Client ID:</span> {credential?.client_id}
                             </p>
                             <p className="text-[14px] flex gap-3">
-                                <span className="font-[500]"> Client Secret:</span> <span>{toggles[key] ? (<spa>******************</spa>) : (<p>{credential?.client_secret}</p>)}   </span>
+                                <span className="font-[500]"> Client Secret:</span> <span>{toggles[key] ? (<span>******************</span>) : (<p>{credential?.client_secret}</p>)}   </span>
 
                                 <i
                                     className={`bi ${!toggles[key] ? "bi-eye-slash" : "bi-eye"}`}

@@ -14,7 +14,7 @@ export default function FloatingButton({ toggle }) {
         setIsOpen(!isOpen);
     };
 
-    <chatSupportLabel isOpen={isOpen} setIsOpen={setIsOpen} />
+    // <chatSupportLabel isOpen={isOpen} setIsOpen={setIsOpen} />
 
 
     return (

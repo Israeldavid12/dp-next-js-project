@@ -7,7 +7,7 @@ import { AddProductsLoad } from '../../_components/LoadindAnim'
 import { CancelCreate } from './_components/Buttons';
 import { useRouter } from 'next/navigation';
 import Submit from './_components/Submit'
-import { Package, FileText, DollarSign, ExternalLink, Tag, Upload } from 'lucide-react';
+import { Package, FileText, DollarSign, ExternalLink, Tag, Upload, CheckCircle, AlertCircle } from 'lucide-react';
 
 export default function CreateProduct() {
     const [type, setType] = useState(null)

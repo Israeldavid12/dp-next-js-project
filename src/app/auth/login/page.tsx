@@ -14,6 +14,8 @@ import Spinner from './_components/Spinner'
 export default function Login() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const router = useRouter()
 
 
@@ -96,7 +98,7 @@ export default function Login() {
               type="email"
               id="email"
               name='email'
-              maxLength="100"
+              maxLength={100}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
@@ -109,7 +111,7 @@ export default function Login() {
                 type="password"
                 id="password"
                 name='password'
-                maxLength="100"
+                maxLength={100}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />

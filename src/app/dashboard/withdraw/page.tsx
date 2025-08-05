@@ -169,7 +169,7 @@ export default function Withdraw() {
                     <div className="flex gap-3 justify-center items-center rounded-md p-2 bg-white" >
                         <p className="text-[13px]" > Saques:</p>
                         <input
-                            onChange={(e) => setLimit(e.target.value)}
+                            onChange={(e) => setLimit(Number(e.target.value))}
                             type="number" min={0} placeholder="10"
                             className="w-full text-sm focus:outline-none outline-none p-2 focus:ring-1 focus:ring-blue-500  border-[silver] border-1 rounded-md"
                         />
