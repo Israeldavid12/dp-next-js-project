@@ -1,5 +1,8 @@
 "use client"
 
+/* eslint-disable react/display-name */
+
+
 import mpesaicon from '../../../../../public/images/mpesa.png'
 import emolaicon from '../../../../../public/images/emola.png'
 import Image from 'next/image'
@@ -118,6 +121,7 @@ const PayoutsPage = () => {
     const acc_id = searchParams.get('acc_id')
     const methodId = searchParams.get('methodId')
     const method_type = searchParams.get('type')
+    const isFormValid = !!formData.account_holder?.trim() && !!formData.account_id?.trim();
 
     const userId = useUserId()
 
@@ -208,7 +212,7 @@ const PayoutsPage = () => {
 
 
 
-    const isFormValid = !!formData.account_holder?.trim() && !!formData.account_id?.trim();
+
 
     return (
         <div className="min-h-screen bg-gray-50 p-4 sm:p-8">
