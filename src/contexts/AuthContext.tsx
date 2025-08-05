@@ -3,7 +3,21 @@ import axios from "axios";
 const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 
-export const AuthContext = createContext();
+interface AuthContextType {
+  token: string | null;
+  setToken: React.Dispatch<React.SetStateAction<string | null>>;
+  user: any;
+  isAuthenticated: boolean;
+  loading: boolean;
+}
+
+export const AuthContext = createContext<AuthContextType>({
+  token: null,
+  setToken: () => {},
+  user: null,
+  isAuthenticated: false,
+  loading: true,
+});
 
 export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(() => localStorage.getItem("token"));

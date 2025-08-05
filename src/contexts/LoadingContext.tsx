@@ -1,8 +1,16 @@
 import React, { createContext, useState, useContext } from 'react';
 import { Loading } from '../app/dashboard/_components/LoadindAnim'; // ajuste o caminho conforme necessário
 
-const LoadingContext = createContext();
-export const AuthContext = createContext();
+type LoadingContextType = {
+  isLoading: boolean;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const LoadingContext = createContext<LoadingContextType>({
+  isLoading: false,
+  setIsLoading: () => {},
+});
+export const AuthContext = createContext(null);
 
 export const LoadingProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
