@@ -3,7 +3,7 @@
 import mpesaicon from '../../../../../public/images/mpesa.png'
 import emolaicon from '../../../../../public/images/emola.png'
 import Image from 'next/image'
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { useSearchParams } from "next/navigation"
 import { Input } from '@/components/ui/input'
 import axios from 'axios'
@@ -108,7 +108,7 @@ const AlertMessage = ({ type, message }) => (
 
 
 
-export default function Payout() {
+const PayoutsPage = () => {
     const [selectedType, setSelectedType] = useState(null)
     const [formData, setFormData] = useState({
         account_holder: '',
@@ -332,3 +332,7 @@ export default function Payout() {
         </div>
     )
 }
+
+
+
+export default PayoutsPage
