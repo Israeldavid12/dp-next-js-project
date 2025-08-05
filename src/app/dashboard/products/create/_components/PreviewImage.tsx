@@ -19,7 +19,10 @@ const ImageUploadPreview = ({ elementId }) => {
 
   const removeImage = () => {
     setImagePreview(null);
-    document.getElementById(elementId).value = '';
+    const input = document.getElementById(elementId) as HTMLInputElement | null;
+    if (input) {
+      input.value = '';
+    }
   };
 
   return (
