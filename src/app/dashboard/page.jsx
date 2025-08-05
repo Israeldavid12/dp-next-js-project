@@ -74,8 +74,8 @@ function DasboardPage() {
       <div className={dashStayles.dashboard} >
         {user && (<h1 className='justify-self-start text-[20px] ' >Olá, <strong>{user?.name}</strong> </h1>)}
         <div className='relative' >
-          <i className={`shadow-lg bi bi-x-circle-fill text-lg text-red-700 -translate-3  z-100 absolute ${banner ? '' : 'hidden'} `} onClick={() => setBanner(false)} ></i>
-          <Image src={BanerImage} alt='banner' className={`z-0 ${banner ? '' : 'hidden'}`} />
+          {/* <i className={`shadow-lg bi bi-x-circle-fill text-lg text-red-700 -translate-3  z-100 absolute ${banner ? '' : 'hidden'} `} onClick={() => setBanner(false)} ></i> */}
+          {/* <Image src={BanerImage} alt='banner' className={`z-0 ${banner ? '' : 'hidden'}`} /> */}
         </div>
         <Suspense fallback={<Loading />} >
           <FinancesStatus summary={summary} />

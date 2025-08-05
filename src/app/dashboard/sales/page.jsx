@@ -70,9 +70,9 @@ function ListSales({ sales, setQueryTime }) {
                     type="button" onClick={() => setResLimit(limit)} className=" w-full max-w-30 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-[12px]">Aplicar filtros</button>
             </div> */}
 
-            <div class="mb-4 bg-white p-4 rounded-lg shadow-sm ">
-                <p class="mb-2 text-sm font-semibold text-gray-700">Data</p>
-                <select onChange={(e) => setQueryTime(e.target.value)} name="time" id="time-filter" class="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div className="mb-4 bg-white p-4 rounded-lg shadow-sm ">
+                <p className="mb-2 text-sm font-semibold text-gray-700">Data</p>
+                <select onChange={(e) => setQueryTime(e.target.value)} name="time" id="time-filter" className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                     {/* <option value="no">Sempre</option> */}
                     <option value="all">Sempre</option>
                     <option value="today">Hoje</option>
@@ -205,16 +205,16 @@ export default function SalesPage() {
     return (
         <div className="grid gap-4 sm:p-8" >
             <div>
-                <p className="text-[19px]"><span className="font-[600]" >Vendas</span> <a href="/dashboard"><i class="bi bi-arrow-bar-left"></i> Dashboard</a></p>
+                <p className="text-[19px]"><span className="font-[600]" >Vendas</span> <a href="/dashboard"><i className="bi bi-arrow-bar-left"></i> Dashboard</a></p>
                 <p className="text-[13px]">Confira o histórico de transações e administre suas vendas com facilidade.</p>
             </div>
             <div className=" grid  md:flex gap-4 ">
                 <div className="bg-white grid gap-2 rounded-md p-5 w-full text-[12px] shadow">
-                    <p>Total de vendas realizadas <i class="bi bi-info-circle-fill"></i></p>
+                    <p>Total de vendas realizadas <i className="bi bi-info-circle-fill"></i></p>
                     <span id="sales-lenght" className="text-[23px] font-bold " >{salesCount || 0}</span>
                 </div>
                 <div className="bg-white grid -gap-2 rounded-md p-5 w-full text-[12px] shadow">
-                    <p>Valor líquido <i class="bi bi-info-circle-fill"></i></p>
+                    <p>Valor líquido <i className="bi bi-info-circle-fill"></i></p>
                     <span id="sales-made" className="text-[23px] font-bold" >{balance + ' MT'}</span>
                 </div>
             </div>

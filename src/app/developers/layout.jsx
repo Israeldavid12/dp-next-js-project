@@ -87,12 +87,12 @@ const Layout = ({ children }) => {
 
           </div>
           <div className="sm:hidden flex">
-            <i onClick={() => setSideBar(!is_sidebar)} class="bi bi-list text-2xl"></i>
+            <i onClick={() => setSideBar(!is_sidebar)} className="bi bi-list text-2xl"></i>
           </div>
 
           <div>
             <a href="/auth/logout">
-              <p><i class="bi bi-box-arrow-in-left"></i> Sair</p>
+              <p><i className="bi bi-box-arrow-in-left"></i> Sair</p>
             </a>
           </div>
         </header>

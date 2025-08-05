@@ -72,11 +72,11 @@ export default function DashboardLayout({ children }) {
                         <a href="/dashboard/sales" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/dashboard/sales" ? "active-item" : ""}`}> <i className="bi bi-graph-up-arrow text-[18px]"></i> Vendas</a>
 
                         <a href="/dashboard/withdraw" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/dashboard/withdraw" ? "active-item" : ""}`}>
-                            <i class="bi bi-cash text-[18px]"></i> Saques</a>
+                            <i className="bi bi-cash text-[18px]"></i> Saques</a>
 
                         <a href="/dashboard/profile" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/dashboard/profile" ? "active-item" : ""}`}> <i className="bi bi-person-circle text-[18px]"></i>   Minha conta</a>
 
-                        <a href="/dashboard/marketplace" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/dashboard/marketplace" ? "active-item" : ""}`}> <i class="bi bi-shop text-[18px]"></i> Afiliação</a>
+                        <a href="/dashboard/marketplace" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/dashboard/marketplace" ? "active-item" : ""}`}> <i className="bi bi-shop text-[18px]"></i> Afiliação</a>
 
                         <a href="/dashboard/send_feedback" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/dashboard/send_feedback" ? "active-item" : ""}`}>   <i className="bi bi-chat-right-text-fill text-[18px]"></i>  FeedBack</a>
 

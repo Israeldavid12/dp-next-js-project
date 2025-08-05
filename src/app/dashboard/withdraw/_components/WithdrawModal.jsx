@@ -178,7 +178,7 @@ export default function WithdrawPopUp({ balances, payouts_wallets }) {
 
                             <div className="flex justify-between" >
                                 <p>Solicitar saque</p>
-                                <i onClick={() => setShowPopUp(false)} class="bi bi-x-lg"></i>
+                                <i onClick={() => setShowPopUp(false)} className="bi bi-x-lg"></i>
                             </div>
                             <p className="text-green-600 font-[600]" >{mensage}</p>
                             <hr className="text-[silver] my-3" />

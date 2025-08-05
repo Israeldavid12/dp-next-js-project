@@ -22,33 +22,76 @@ const PAYMENT_METHODS = {
 
 
 
- const FormInput =  React.memo(({ label, value, onChange, type = "text", error }) => (
-        <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
-                {label} <span className="text-red-500">*</span>
-            </label>
-            <Input
-                type={type}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                placeholder={`Digite ${label.toLowerCase()}`}
-                className={`
+const FormInput = React.memo(({ label, value, onChange, type = "text", error }) => (
+    <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">
+            {label} <span className="text-red-500">*</span>
+        </label>
+        <Input
+            type={type}
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            placeholder={`Digite ${label.toLowerCase()}`}
+            className={`
         w-full px-3 py-2 border rounded-md shadow-sm transition-colors
         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
         ${error ? 'border-red-300 bg-red-50' : 'border-gray-300'}
       `}
-            />
+        />
 
-            {error && (
-                <p className="text-sm text-red-600 flex items-center gap-1">
-                    <i className="bi bi-exclamation-circle"></i>
-                    {error}
-                </p>
-            )}
+        {error && (
+            <p className="text-sm text-red-600 flex items-center gap-1">
+                <i className="bi bi-exclamation-circle"></i>
+                {error}
+            </p>
+        )}
+    </div>
+))
+
+
+
+const PaymentMethodCard = ({ type, icon, isSelected, onClick }) => (
+    <div
+        onClick={onClick}
+        className={`
+                relative cursor-pointer rounded-lg border-2 p-4 transition-all duration-200
+                ${isSelected
+                ? 'border-blue-500 bg-blue-50 shadow-md'
+                : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
+            }
+            `}
+    >
+        <Image
+            alt={`${type} icon`}
+            className="w-16 h-16 object-contain mx-auto"
+            src={icon}
+        />
+        <p className="text-center mt-2 text-sm font-medium text-gray-700">{type}</p>
+        {isSelected && (
+            <div className="absolute top-2 right-2">
+                <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
+                    <i className="bi bi-check text-white text-xs"></i>
+                </div>
+            </div>
+        )}
+    </div>
+)
+
+
+const AlertMessage = ({ type, message }) => (
+    <div className={`
+            p-4 rounded-lg border-l-4 
+            ${type === 'success'
+            ? 'bg-green-50 border-green-400 text-green-800'
+            : 'bg-red-50 border-red-400 text-red-800'
+        }
+        `}>
+        <div className="flex items-center gap-2">
+            <i className={`bi ${type === 'success' ? 'bi-check-circle' : 'bi-exclamation-triangle'}`}></i>
+            <p className="text-sm font-medium">{message}</p>
         </div>
-    ))
-
-
+    </div>
+)
 
 
 
@@ -161,51 +204,13 @@ export default function Payout() {
         }
     }
 
-    const PaymentMethodCard = ({ type, icon, isSelected, onClick }) => (
-        <div
-            onClick={onClick}
-            className={`
-                relative cursor-pointer rounded-lg border-2 p-4 transition-all duration-200
-                ${isSelected
-                    ? 'border-blue-500 bg-blue-50 shadow-md'
-                    : 'border-gray-200 hover:border-gray-300 hover:shadow-sm'
-                }
-            `}
-        >
-            <Image
-                alt={`${type} icon`}
-                className="w-16 h-16 object-contain mx-auto"
-                src={icon}
-            />
-            <p className="text-center mt-2 text-sm font-medium text-gray-700">{type}</p>
-            {isSelected && (
-                <div className="absolute top-2 right-2">
-                    <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
-                        <i className="bi bi-check text-white text-xs"></i>
-                    </div>
-                </div>
-            )}
-        </div>
-    )
 
-   
 
-    const AlertMessage = ({ type, message }) => (
-        <div className={`
-            p-4 rounded-lg border-l-4 
-            ${type === 'success'
-                ? 'bg-green-50 border-green-400 text-green-800'
-                : 'bg-red-50 border-red-400 text-red-800'
-            }
-        `}>
-            <div className="flex items-center gap-2">
-                <i className={`bi ${type === 'success' ? 'bi-check-circle' : 'bi-exclamation-triangle'}`}></i>
-                <p className="text-sm font-medium">{message}</p>
-            </div>
-        </div>
-    )
 
-    const isFormValid = formData.account_holder.trim() && formData.account_id.trim()
+
+
+
+    const isFormValid = !!formData.account_holder?.trim() && !!formData.account_id?.trim();
 
     return (
         <div className="min-h-screen bg-gray-50 p-4 sm:p-8">

@@ -187,7 +187,7 @@ export default function Submit({ formData, product_type }) {
             <div className="z-100 opacity-100 bg-white p-3 text-black rounded-md w-100" >
                 <div className="flex justify-between" >
                     <p className="font-[600]" >Submisao</p>
-                    <i onClick={() => setIsActive(false)} class="bi bi-x-lg"></i>
+                    <i onClick={() => setIsActive(false)} className="bi bi-x-lg"></i>
                 </div>
                 {!isSucess ? (
                     <div className="flex flex-col " >

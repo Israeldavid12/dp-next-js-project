@@ -91,11 +91,11 @@ function Listwithdraw({ withdraw, limit = 10 }) {
 
 function Alert() {
     return (
-        <div class="flex items-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
-            <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+        <div className="flex items-center p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800" role="alert">
+            <svg className="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
             </svg>
-            <span class="sr-only">Info</span>
+            <span className="sr-only">Info</span>
             <div>
                 Faça saques e veja o historico de saques ja feitos
             </div>
@@ -152,12 +152,12 @@ export default function Withdraw() {
     return (
         <div className="grid sm:gap-4 sm:p-8" >
             <div>
-                <p className="text-[19px]"><span className="font-[600]" >Saques</span> <a href="/dashboard"><i class="bi bi-arrow-bar-left"></i> Dashboard</a></p>
+                <p className="text-[19px]"><span className="font-[600]" >Saques</span> <a href="/dashboard"><i className="bi bi-arrow-bar-left"></i> Dashboard</a></p>
                 <Alert />
 
                 <div className="flex justify-between bg-white rounded-md p-4" >
-                    <div class="a-balance" >
-                        <p className="text-[13px]" >Saldo disponivel <span><i class="bi bi-credit-card-2-back-fill"></i>   </span></p>
+                    <div className="a-balance" >
+                        <p className="text-[13px]" >Saldo disponivel <span><i className="bi bi-credit-card-2-back-fill"></i>   </span></p>
                         <p className="text-[18px] ml-3" id="w-balance">{(balances?.mpesa_emola || '0.00' + ' MT') || '0.00 MT'}</p>
                     </div>
                     <WithdrawPopUp balances={balances} payouts_wallets={payouts} />
