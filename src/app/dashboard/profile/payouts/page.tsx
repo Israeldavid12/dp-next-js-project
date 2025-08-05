@@ -1,9 +1,9 @@
-'use client'
+"use client"
 
 import mpesaicon from '../../../../../public/images/mpesa.png'
 import emolaicon from '../../../../../public/images/emola.png'
 import Image from 'next/image'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect} from 'react'
 import { useSearchParams } from "next/navigation"
 import { Input } from '@/components/ui/input'
 import axios from 'axios'
@@ -22,7 +22,15 @@ const PAYMENT_METHODS = {
 
 
 
-const FormInput = React.memo(({ label, value, onChange, type = "text", error }) => (
+type FormInputProps = {
+    label: string;
+    value: string;
+    onChange: (value: string) => void;
+    type?: string;
+    error?: string;
+};
+
+const FormInput: React.FC<FormInputProps> = React.memo(({ label, value, onChange, type = "text", error }) => (
     <div className="space-y-2">
         <label className="block text-sm font-medium text-gray-700">
             {label} <span className="text-red-500">*</span>
@@ -108,7 +116,7 @@ export default function Payout() {
     })
     const [response, setResponse] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
-    const [errors, setErrors] = useState({})
+    const [errors, setErrors] = useState<{ account_holder?: string; account_id?: string }>({})
 
     const searchParams = useSearchParams()
     const holder = searchParams.get('holder')
@@ -116,7 +124,6 @@ export default function Payout() {
     const methodId = searchParams.get('methodId')
     const method_type = searchParams.get('type')
 
-    const isFirstRender = useRef(true)
     const userId = useUserId()
 
     // Initialize form data and payment type
@@ -135,7 +142,7 @@ export default function Payout() {
     }, [method_type, holder, acc_id])
 
     const validateForm = () => {
-        const newErrors = {}
+        const newErrors: { account_holder?: string; account_id?: string } = {}
 
         if (!formData.account_holder.trim()) {
             newErrors.account_holder = 'Nome do titular é obrigatório'
@@ -203,10 +210,6 @@ export default function Payout() {
             setIsLoading(false)
         }
     }
-
-
-
-
 
 
 
