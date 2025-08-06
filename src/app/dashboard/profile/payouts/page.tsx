@@ -174,6 +174,15 @@ const PayoutsPage = () => {
         if (!validateForm()) return
         const token = localStorage.getItem('sessionToken')
 
+        if (!token) {
+            setResponse({
+                type: 'error',
+                message: 'Sessão expirada. Por favor, faça login novamente.'
+            });
+            setIsLoading(false);
+            return;
+        }
+
         setIsLoading(true)
         setResponse(null)
 
@@ -200,7 +209,7 @@ const PayoutsPage = () => {
                 })
             }
         } catch (error) {
-            console.error('Erro ao salvar:', error)
+            console.log('Erro ao salvar:', error)
             setResponse({
                 type: 'error',
                 message: 'Erro ao salvar informações. Tente novamente.'
