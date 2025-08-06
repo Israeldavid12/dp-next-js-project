@@ -106,15 +106,6 @@ const AlertMessage = ({ type, message }) => (
 
 
 const PayoutsPage = () => {
-    // const [isClient, setIsClient] = useState(false);
-
-    // useEffect(() => {
-    //     setIsClient(true);
-    // }, []);
-
-    // if (!isClient) {
-    //     return null;
-    // }
 
     const [isSubmit, setIsSubmit] = useState(0)
 
