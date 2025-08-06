@@ -6,12 +6,11 @@
 import mpesaicon from '../../../../../public/images/mpesa.png'
 import emolaicon from '../../../../../public/images/emola.png'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSearchParams } from "next/navigation"
 import { Input } from '@/components/ui/input'
 import axios from 'axios'
 import useUserId from '../../../hooks/useUserId'
-import React from 'react'
 const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 const PAYMENT_METHODS = {
@@ -107,6 +106,18 @@ const AlertMessage = ({ type, message }) => (
 
 
 const PayoutsPage = () => {
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    if (!isClient) {
+        return null;
+    }
+
+    const [isSubmit, setIsSubmit] = useState(0)
+
     const [selectedType, setSelectedType] = useState(null)
     const [formData, setFormData] = useState({
         account_holder: '',
@@ -219,12 +230,18 @@ const PayoutsPage = () => {
         }
     }
 
+    useEffect(() => {
+        if (isSubmit !== 0) {
+            handleSubmit()
+        }
+    }, [isSubmit])
+
 
 
 
 
     return (
-        <div className="min-h-screen bg-gray-50 p-4 sm:p-8">
+        <div translate="no" className="min-h-screen bg-gray-50 p-4 sm:p-8">
             <div className="max-w-2xl mx-auto">
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 sm:p-8">
                     {/* Header */}
@@ -239,7 +256,7 @@ const PayoutsPage = () => {
                         </div>
 
                         <p className="text-sm text-gray-600 leading-relaxed">
-                            Atualize ou adicione um novo método de pagamento.<br />
+                            <span className='mb-2' > Atualize ou adicione um novo método de pagamento.</span>
                             <strong>Nota:</strong> Você pode adicionar até 3 formas de pagamento à sua conta.
                         </p>
                     </div>
@@ -310,6 +327,7 @@ const PayoutsPage = () => {
                             {/* Submit Button */}
                             <div className="flex justify-end">
                                 <button
+                                    type="button"
                                     onClick={handleSubmit}
                                     disabled={!isFormValid || isLoading}
                                     className={`
