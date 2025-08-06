@@ -230,11 +230,11 @@ const PayoutsPage = () => {
         }
     }
 
-    useEffect(() => {
-        if (isSubmit !== 0) {
-            handleSubmit()
-        }
-    }, [isSubmit])
+    // useEffect(() => {
+    //     if (isSubmit !== 0) {
+    //         handleSubmit()
+    //     }
+    // }, [isSubmit])
 
 
 
