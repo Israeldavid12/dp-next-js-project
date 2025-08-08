@@ -164,7 +164,7 @@ export default function Submit({ formData, product_type }) {
                 if (response.status) {
                     router.push('/dashboard/products')
                 }
-                setResponse(response?.message)
+                // setResponse(response?.message)
                 setIsLoading(false)
 
             } catch (e) {
