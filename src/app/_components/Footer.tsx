@@ -27,9 +27,9 @@ export default function Footer() {
                 </div>
                 <div className="footer-column">
                     <h3><strong>Suporte</strong></h3>
-                    <a href="https://api.whatsapp.com/send?phone=258863814050&text=Preciso%20de%20ajuda...">Centro de
+                    <a href="https://api.whatsapp.com/send?phone=258852610323&text=Preciso%20de%20ajuda...">Centro de
                         ajuda</a>
-                    <a href="https://api.whatsapp.com/send?phone=258863814050">Fale conosco</a>
+                    <a href="https://api.whatsapp.com/send?phone=258852610323">Fale conosco</a>
                 </div>
             </div>
             <p className="mt-4 text-center text-[13px]" >&copy; DROP PAY é operado pela DROP PAGAMENTOS

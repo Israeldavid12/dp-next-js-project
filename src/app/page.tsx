@@ -51,7 +51,7 @@ function SideMenu({ isOpen, setSideMenu }) {
               <a href="#faq">FAQ</a>
             </li>
             <li className="hover:bg-gray-100 px-6 py-3 rounded-full">
-              <a href="https://api.whatsapp.com/send?phone=258863814050">Suporte</a>
+              <a href="https://api.whatsapp.com/send?phone=258852610323">Suporte</a>
             </li>
             <button className="hover:bg-gray-100 px-6 py-3 rounded-full login ring ring-[silver] shadow-md">
               <a href="/auth/login/">Entrar</a>
@@ -170,7 +170,7 @@ export default function Home() {
               <li className="hover:bg-gray-100 px-6 py-3 rounded-full"  ><a href="#">Soluções</a></li>
               <li className="hover:bg-gray-100 px-6 py-3 rounded-full" ><a href="#tax">Taxas</a></li>
               <li className="hover:bg-gray-100 px-6 py-3 rounded-full" ><a href="#faq">FAQ</a></li>
-              <li className="hover:bg-gray-100 px-6 py-3 rounded-full" ><a href="https://api.whatsapp.com/send?phone=258863814050">Suporte</a></li>
+              <li className="hover:bg-gray-100 px-6 py-3 rounded-full" ><a href="https://api.whatsapp.com/send?phone=258852610323">Suporte</a></li>
               <button className="hover:bg-gray-100 px-6 py-3 rounded-full login ring ring-[silver] shadow-md" ><a href="auth/login/">Entrar</a></button>
               <button className="hover:bg-blue-600 px-6 py-3 rounded-full signup bg-blue-700 text-white shadow-md" ><a href="auth/register/">Criar conta</a></button>
             </ul>
