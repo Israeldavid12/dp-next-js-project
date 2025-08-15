@@ -33,7 +33,7 @@ export default function MobileMenu() {
 
                                 <a href="/dashboard/products" className={`sideItemMobile ${pathname === "/dashboard/products" ? "active-item-mobile" : ""}`}> <i className="bi bi-box"></i>  Meus produtos</a>
 
-                                <a href="/dashboard/sales" className={`sideItemMobile ${pathname === "/dashboard/sales" ? "active-item-mobile" : ""}`}><i className="bi bi-graph-up-arrow"></i>  Vendas</a>
+                                <a href="/dashboard/sales?period=all" className={`sideItemMobile ${pathname === "/dashboard/sales" ? "active-item-mobile" : ""}`}><i className="bi bi-graph-up-arrow"></i>  Vendas</a>
 
                                 <a href="/dashboard/withdraw" className={`sideItemMobile ${pathname === "/dashboard/withdraw" ? "active-item-mobile" : ""}`}> <i className="bi bi-credit-card-2-back"></i>  Saques</a>
 

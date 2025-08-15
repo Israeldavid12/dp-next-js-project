@@ -69,7 +69,7 @@ export default function DashboardLayout({ children }) {
 
                         <a href="/dashboard/products" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/dashboard/products" ? "active-item" : ""}`}> <i className="bi bi-box text-[18px]"></i>   Meus produtos</a>
 
-                        <a href="/dashboard/sales" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/dashboard/sales" ? "active-item" : ""}`}> <i className="bi bi-graph-up-arrow text-[18px]"></i> Vendas</a>
+                        <a href="/dashboard/sales?period=all" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/dashboard/sales" ? "active-item" : ""}`}> <i className="bi bi-graph-up-arrow text-[18px]"></i> Vendas</a>
 
                         <a href="/dashboard/withdraw" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/dashboard/withdraw" ? "active-item" : ""}`}>
                             <i className="bi bi-cash text-[18px]"></i> Saques</a>
