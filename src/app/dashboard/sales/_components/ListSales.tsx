@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react"
 import mpesa from '../../../../../public/images/mpesa.png'
+import emola from '../../../../../public/images/emola.png'
 import Image from "next/image"
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import {
@@ -23,7 +24,9 @@ const renderMethodIcon = (method: any) => {
         case 'mpesa':
             return <Image src={mpesa} alt="mpesa" className="rounded-lg h-8 w-8" />
             break;
-
+        case 'emola': 
+        return <Image src={emola} alt="emola" className="rounded-lg h-8 w-8" />
+        break;
         default:
             return <Image src={mpesa} alt="mpesa" className="rounded-lg h-8 w-8" />
             break;
