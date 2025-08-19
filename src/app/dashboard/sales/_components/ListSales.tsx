@@ -177,7 +177,7 @@ export default function ListSales({ sales, setQueryTime, query_time }) {
                     type="button" onClick={() => setResLimit(limit)} className=" w-full max-w-30 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-xs px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 text-[12px]">Aplicar filtros</button>
             </div> */}
 
-            <div className="mb-4 bg-white p-4 rounded-lg shadow-sm ">
+            <div className="mb-4 bg-white p-4  ">
                 <p className="mb-2 text-sm font-semibold text-gray-700">Periodo de atualização</p>
                 <select
                     value={period}
@@ -189,7 +189,7 @@ export default function ListSales({ sales, setQueryTime, query_time }) {
                     //     }, undefined, { shallow: true });
                     // }}
                     name="time" id="time-filter"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    className="w-full px-4 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
 
                     <option value="all">Maximo</option>
                     <option value="today">Hoje</option>

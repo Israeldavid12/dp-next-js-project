@@ -15,19 +15,25 @@ const StatusVIew = ({ status }) => {
             <div className="m-2 w-full self-center" >
                 {status === 'pendente' && (
 
-                    <td className="px-2 py-1 m-2 w-full text-[13px] text-center bg-yellow-200 text-yellow-800 rounded-md">
-                        {status || 'N/A'}
+                    <td className="px-2 py-1 m-2 w-ful">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 border border-yellow-200">
+                            Pendente
+                        </span>
                     </td>
 
                 )}
                 {status === 'revisao' && (
-                    <td className="px-2 py-1 m-2  w-full text-[13px] text-center bg-orange-200 text-orange-800 rounded-md">
-                        {status || 'N/A'}
+                    <td className="px-2 py-1 m-2  ">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 border border-yellow-200">
+                            Pendente
+                        </span>
                     </td>
                 )}
                 {status === 'concluido' && (
-                    <td className="px-2 py-1 m-2 w-full text-[13px] text-center bg-green-200 text-green-800 rounded-md">
-                        {status || 'N/A'}
+                    <td className="px-2 py-1 m-2 w-full">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 border border-green-200">
+                            Concluído
+                        </span>
                     </td>
                 )}
             </div>

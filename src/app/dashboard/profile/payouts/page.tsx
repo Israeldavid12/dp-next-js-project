@@ -2,7 +2,7 @@
 
 /* eslint-disable react/display-name */
 
-
+import BimIcon from '../../../../../public/images/bim.jpeg'
 import mpesaicon from '../../../../../public/images/mpesa.png'
 import emolaicon from '../../../../../public/images/emola.png'
 import Image from 'next/image'
@@ -15,7 +15,8 @@ const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 const PAYMENT_METHODS = {
     MPESA: 'Mpesa',
-    EMOLA: 'eMola'
+    EMOLA: 'eMola',
+    BIM: 'BIM'
 }
 
 
@@ -276,6 +277,12 @@ const PayoutsPage = () => {
                                 icon={emolaicon}
                                 isSelected={selectedType === PAYMENT_METHODS.EMOLA}
                                 onClick={() => setSelectedType(PAYMENT_METHODS.EMOLA)}
+                            />
+                             <PaymentMethodCard
+                                type={PAYMENT_METHODS.BIM}
+                                icon={BimIcon}
+                                isSelected={selectedType === PAYMENT_METHODS.BIM}
+                                onClick={() => setSelectedType(PAYMENT_METHODS.BIM)}
                             />
                         </div>
                     </div>

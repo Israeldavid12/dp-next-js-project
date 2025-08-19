@@ -87,13 +87,13 @@ export default function SalesPage() {
                 <p className="text-[13px]">Confira o histórico de transações e administre suas vendas com facilidade.</p>
             </div>
             <div className=" grid  md:flex gap-4 ">
-                <div className="bg-white grid gap-2 rounded-md p-5 w-full text-[12px] shadow">
+                <div className="bg-white grid gap-2 rounded-md p-5 w-full text-[12px] ">
                     <p>Total de vendas realizadas <i className="bi bi-info-circle-fill"></i></p>
                     <span id="sales-lenght" className="text-[23px] font-bold " >{salesCount || 0}</span>
                 </div>
-                <div className="bg-white grid -gap-2 rounded-md p-5 w-full text-[12px] shadow">
+                <div className="bg-white grid -gap-2 rounded-md p-5 w-full text-[12px] ">
                     <p>Valor líquido <i className="bi bi-info-circle-fill"></i></p>
-                    <span id="sales-made" className="text-[23px] font-bold" >{balance + ' MT'}</span>
+                    <span id="sales-made" className="text-[23px] text-green-700" >{balance + ' MT'}</span>
                 </div>
             </div>
 

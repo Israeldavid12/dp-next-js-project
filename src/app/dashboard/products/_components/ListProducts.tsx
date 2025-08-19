@@ -49,7 +49,7 @@ export default function ListProducts() {
 
                 if (userId) {
                     setLoading(true)
-                    const req = await axios.get(apiUrl+'/api/products/all',{
+                    const req = await axios.get(apiUrl + '/api/products/all', {
                         headers: {
                             Authorization: `Bearer ${localStorage.getItem('sessionToken')}`
                         }
@@ -98,15 +98,16 @@ export default function ListProducts() {
                     {products && products.length > 0 ? (
 
                         products.map((product) => (
-                            <div key={product.id} className='grid gap-2 h-83 w-70  w-max-md mx-auto bg-white p-4 shadow-md transition duration-200 ease-in-out transform hover:scale-103' >
-                                <img className='h-40 w-full rounded-md' src={product.image_url} alt="image" />
+                            <div key={product.id} className='grid gap-2 max-h-full max-w-full  w-max-md mx-auto bg-white p-4 shadow-md transition duration-200 ease-in-out transform hover:scale-103' >
+                                <div className='flex justify-between gap-3 items-center' >
+                                    <p className='font-bold text-start text-[14px]' >{product.name}</p>
+                                    <ActionMenu id={product.id} />
+                                </div>
+                                <img className='h-full w-full rounded-md' src={product.image_url} alt="image" />
                                 <p className='text-xs' >ID: {product.id}</p>
                                 <p className='text-xs font-bold text-green-700' >{product.price} MT</p>
                                 <ProductStatus status={product.status} />
-                                <div className='flex justify-between gap-3' >
-                                    <p className='font-bold text-start text-[13px]' >{product.name}</p>
-                                    <ActionMenu id={product.id} />
-                                </div>
+
 
                             </div>
 
