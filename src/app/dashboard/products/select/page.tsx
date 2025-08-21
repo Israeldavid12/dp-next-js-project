@@ -14,15 +14,6 @@ export default function SelectType() {
 
     const productTypes = [
         {
-            id: "ebook",
-            icon: <FileText className="w-8 h-8 text-blue-600" />,
-            title: "eBook - Livros Digitais",
-            description: "eBooks, Documentos, Assinaturas digitais",
-            subtitle: "PDF, EPUB e outros formatos digitais",
-            bgColor: "bg-blue-50 border-blue-200",
-            iconBg: "bg-blue-100"
-        },
-        {
             id: "payments",
             icon: <CreditCard className="w-8 h-8 text-green-600" />,
             title: "Link de Pagamento",
@@ -39,12 +30,21 @@ export default function SelectType() {
             subtitle: "Redireciona para link externo",
             bgColor: "bg-purple-50 border-purple-200",
             iconBg: "bg-purple-100"
+        },
+        {
+            id: "ebook",
+            icon: <FileText className="w-8 h-8 text-blue-600" />,
+            title: "eBook - Livros Digitais",
+            description: "eBooks, Documentos, Assinaturas digitais",
+            subtitle: "PDF, EPUB e outros formatos digitais",
+            bgColor: "bg-blue-50 border-blue-200",
+            iconBg: "bg-blue-100"
         }
     ];
 
     return (
         <div className="p-6 max-w-6xl mx-auto">
-            
+
             <div className="text-center mb-8">
                 <h1 className="text-3xl font-bold text-gray-800 mb-2">
                     Que tipo de produto irá vender?
@@ -64,7 +64,7 @@ export default function SelectType() {
                         <div className={`${type.iconBg} w-16 h-16 rounded-lg flex items-center justify-center mb-4 mx-auto`}>
                             {type.icon}
                         </div>
-                        
+
                         <div className="text-center">
                             <h3 className="text-xl font-semibold text-gray-800 mb-2">
                                 {type.title}
