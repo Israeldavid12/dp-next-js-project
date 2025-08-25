@@ -4,6 +4,7 @@ import "./globals.css";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { LoadingProvider } from '../contexts/LoadingContext';
+import Logo from '/public/images/logo.png'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,7 +24,7 @@ export default function RootLayout({ children }) {
       <head>
         <title>Drop Pay</title>
         <meta name="description" content="Drop Payments." />
-        <link rel="icon" href="https://megaofertasco.store/unnamed%20(3).png" />
+        <link rel="icon" href={Logo.src} />
 
         {/* Bootstrap Icons CDN */}
         <link
@@ -56,6 +57,7 @@ export default function RootLayout({ children }) {
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        translate="no"
       >
         <LoadingProvider>
           {children}
