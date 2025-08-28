@@ -97,7 +97,7 @@ function Section2() {
         <p className="sm:text-3xl text-2xl font-[800] text-center mt-12">Quanto cobramos por cada venda sua realizada?</p>
         <div>
           <p>✓ Nao cobramos nenhuma taxa por venda realizada.</p>
-          <p>✓ Atualmente cobramos uma taxa unica de <span className="text-[24px] font-[700] text-green-600">9.9 % </span>por cada saque realizado
+          <p>✓ Atualmente cobramos uma taxa unica de <span className="text-[24px] font-[700] text-green-600">9% </span>por cada saque realizado
             pelo vendedor.</p>
           <a
             className="bg-blue-950 flex justify-center items-center text-white rounded-full w-50 h-12 mt-4"
