@@ -65,7 +65,7 @@ function Form({ setShowPopUp, balances, responseRequest, payouts_wallets }) {
         <form onSubmit={onSubmit} >
             <div className="grid gap-2" >
                 <label htmlFor="w_amount" className="block text-sm font-semibold text-gray-700 mb-2">
-                    💰 Montante (MT)
+                    Montante
                 </label>
                 <input
                     required
@@ -73,17 +73,17 @@ function Form({ setShowPopUp, balances, responseRequest, payouts_wallets }) {
                     className="
                                 no-spinner
                                 w-full  text-sm focus:outline-none outline-none p-2 focus:ring-1 focus:ring-blue-500  border-[silver] border-1 rounded-md"
-                    id="w_amount" type="number" min={100} max={15000} placeholder="0.00" />
+                    id="w_amount" type="number" min={500} max={25000} placeholder="0.00" />
 
                 <p className="text-xs text-gray-500 flex items-center">
                     <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                     </svg>
-                    Mínimo: 100 MT • Máximo: 15,000 MT
+                    Mínimo: 500 MT • Máximo: 25,000 MT
                 </p>
                 <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        💳 Saldo Disponível
+                        Saldo Disponível
                     </label>
 
                     <select className="outline-none text-[15px] w-full p-2 ring ring-[silver] rounded-md bg-white text-gray-800" name="balance_type" id="">
@@ -94,7 +94,7 @@ function Form({ setShowPopUp, balances, responseRequest, payouts_wallets }) {
 
                 </div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    🏦 Carteira de Destino
+                   Carteira de Destino
                 </label>
 
                 {payouts_wallets?.length || 0 > 0 ? (
