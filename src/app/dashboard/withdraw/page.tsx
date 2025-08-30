@@ -54,7 +54,7 @@ function Listwithdraw({ withdraw, limit = 10 }) {
                     <thead className="bg-white ">
                         <tr>
                             <th className="px-4 py-3 text-gray-600 font-semibold ">Valor solicitado:</th>
-                            <th className="px-4 py-3 text-gray-600 font-semibold">Valor a receber:</th>
+                            {/* <th className="px-4 py-3 text-gray-600 font-semibold">Valor a receber:</th> */}
                             <th className="px-4 py-3 text-gray-600 font-semibold">Taxa:</th>
                             <th className="px-4 py-3 text-gray-600 font-semibold">Pagamento</th>
                             <th className="px-4 py-3 text-gray-600 font-semibold">Estado:</th>
@@ -66,7 +66,7 @@ function Listwithdraw({ withdraw, limit = 10 }) {
                         {[...withdraw].reverse().slice(0, limit).map((withdraw) => (
                             <tr key={withdraw.id} className="hover:bg-gray-50 ">
                                 <td className="px-4 py-2">{withdraw.requested_amount || 'N/A'}</td>
-                                <td className="px-4 py-2">{withdraw.amount_receive || 'N/A'}</td>
+                                {/* <td className="px-4 py-2">{withdraw.amount_receive || 'N/A'}</td> */}
                                 <td className="px-4 py-2">{(withdraw.fee).toUpperCase()}</td>
                                 <td className="px-4 py-2">{withdraw?.payment_method || 'N/A'}</td>
                                 <StatusVIew status={withdraw?.status} />
