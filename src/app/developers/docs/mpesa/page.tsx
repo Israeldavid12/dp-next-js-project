@@ -56,10 +56,10 @@ const apiUrl = "https://payment.droopay.com/api/v1/open/payment/mpesa/sandbox";
     {
       language: 'JavaScript com Axios',
       title: 'Processar Pagamento',
-      code: `const apiUrl = "https://payment.droopay.com/api/v1/open/payment/mpesa/sandbox"
+      code: `const apiUrl = "https://payment.droopay.com/api/open/payment/mpesa/sandbox"
 const payment = await axios.post(apiUrl, {
   amount: 1000, //Requerido
-  payment_number: '+258841234567' //Requerido,
+  payment_number: '258841234567' //Requerido,
   reference: 'ORDER-123', //Opcional
   product_name: "Jhon Doe product", //Opcional
    buyer_name: "JHON DOE" //Opcional
@@ -71,8 +71,8 @@ const payment = await axios.post(apiUrl, {
   });`
     },
     {
-      language: 'Json',
-      title: 'Resposta',
+      language: 'Json ',
+      title: 'Resposta, HTTP Status code: 201/200',
       code: `
       {
         "message": "Transação criada com sucesso"

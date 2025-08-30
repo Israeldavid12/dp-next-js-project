@@ -24,7 +24,7 @@ export default function DashboardLayout({ children }) {
     useEffect(() => {
         if (isAuthenticated) {
             const token = localStorage.getItem('sessionToken')
-            axios.get(apiUrl+"/api/user/personal/data", {
+            axios.get(apiUrl + "/api/user/personal/data", {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -34,7 +34,7 @@ export default function DashboardLayout({ children }) {
 
                 })
                 .catch((err) => {
-                   
+
                 });
         }
     }, [isAuthenticated]);
@@ -77,6 +77,8 @@ export default function DashboardLayout({ children }) {
                         <a href="/dashboard/profile" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/dashboard/profile" ? "active-item" : ""}`}> <i className="bi bi-person-circle text-[18px]"></i>   Minha conta</a>
 
                         <a href="/dashboard/marketplace" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/dashboard/marketplace" ? "active-item" : ""}`}> <i className="bi bi-shop text-[18px]"></i> Afiliação</a>
+
+                        <a href="/developers/home" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/developers/home" ? "active-item" : ""}`}>  <i className="bi bi-code-slash text-[18px]"></i>API e Integrações </a>
 
                         <a href="/dashboard/send_feedback" className={`sideItem flex justify-start items-center gap-4 text-[13px] ${pathname === "/dashboard/send_feedback" ? "active-item" : ""}`}>   <i className="bi bi-chat-right-text-fill text-[18px]"></i>  FeedBack</a>
 
