@@ -39,6 +39,8 @@ export default function MobileMenu() {
 
                                 <a href="/dashboard/profile" className={`sideItemMobile ${pathname === "/dashboard/profile" ? "active-item-mobile" : ""}`}> <i className="bi bi-person-circle text-[18px]"></i> Minha conta</a>
 
+                                <a href="/developers/home" className={`sideItemMobile ${pathname === "/developers/home" ? "active-item-mobile" : ""}`}>  <i className="bi bi-code-slash text-[18px]"></i>API e Integrações </a>
+
                                 <a href="/dashboard/send_feedback" className={`sideItemMobile ${pathname === "/dashboard/send_feedback" ? "active-item-mobile" : ""}`}> <i className="bi bi-chat-right-text-fill text-[18px]"></i>   Dar FeedBack</a>
                             </div>
                         </div>
