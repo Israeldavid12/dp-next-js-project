@@ -9,6 +9,8 @@ import { Suspense, useRef, useState, useEffect } from 'react';
 import MobileMenu from './_components/MobileMenu';
 import axios from 'axios';
 import useUserId from '../hooks/useUserId'
+import { checkActivation } from "../lib/utils"
+
 const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
 
 
@@ -19,6 +21,14 @@ export default function DashboardLayout({ children }) {
     const [user, setUser] = useState(null);
     const isAuthenticated = useUserId();
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        const runCheck = async () => {
+            await checkActivation("global");
+        };
+
+        runCheck();
+    }, []);
 
 
     useEffect(() => {

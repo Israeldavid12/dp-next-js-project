@@ -5,6 +5,7 @@ import axios from "axios"
 import Spinner from "../../../../auth/login/_components/Spinner"
 import { handleCreateProduct } from "../handlers/createProductsHandles"
 import { useRouter } from "next/navigation"
+import { checkActivation } from "../../../../lib/utils"
 const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL
 const token = localStorage.getItem('sessionToken')
 
@@ -147,6 +148,7 @@ export default function Submit({ formData, product_type }) {
         async function Submit() {
             try {
                 setIsLoading(true)
+                await checkActivation("local");
                 const verify_ = await verifyQuantity()
 
                 if (!verify_) throw new Error('Limite de produtos atingido');

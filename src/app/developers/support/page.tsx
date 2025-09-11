@@ -6,7 +6,7 @@ const Suporte = () => {
             <div className="space-y-4">
                 <div className="bg-gray-50 p-4 rounded-lg">
                     <h3 className="font-semibold text-lg mb-2">Email</h3>
-                    <p className="text-gray-700">suporte@droopay.com</p>
+                    <p className="text-gray-700">admin@droopay.com</p>
                 </div>
 
                 <div className="bg-gray-50 p-4 rounded-lg">
