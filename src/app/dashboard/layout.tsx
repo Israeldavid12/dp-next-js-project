@@ -22,13 +22,13 @@ export default function DashboardLayout({ children }) {
     const isAuthenticated = useUserId();
     const [isOpen, setIsOpen] = useState(false);
 
-    useEffect(() => {
-        const runCheck = async () => {
-            await checkActivation("global");
-        };
+    // useEffect(() => {
+    //     const runCheck = async () => {
+    //         await checkActivation("global");
+    //     };
 
-        runCheck();
-    }, []);
+    //     runCheck();
+    // }, []);
 
 
     useEffect(() => {
