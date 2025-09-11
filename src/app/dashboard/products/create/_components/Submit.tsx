@@ -148,7 +148,7 @@ export default function Submit({ formData, product_type }) {
         async function Submit() {
             try {
                 setIsLoading(true)
-                await checkActivation("local");
+                // await checkActivation("local");
                 const verify_ = await verifyQuantity()
 
                 if (!verify_) throw new Error('Limite de produtos atingido');
