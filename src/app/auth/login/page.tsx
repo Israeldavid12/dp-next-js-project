@@ -33,6 +33,12 @@ export default function Login() {
         password
       });
       const token = req.data.token;
+      const is_pending = req.data.is_pending;
+
+      if (is_pending) {
+        router.push('/auth/account_pending');
+        return;
+      }
 
       if (token) {
         localStorage.setItem('sessionToken', token)

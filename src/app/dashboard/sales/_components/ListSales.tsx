@@ -146,7 +146,7 @@ const TransactionDetails = ({ transaction }) => {
 
 
 
-export default function ListSales({ sales, setQueryTime, query_time }) {
+export default function ListSales({ sales, setQueryTime, query_time, query_status }) {
     const router = useRouter();
     const searchParams = useSearchParams();
     const pathname = usePathname();

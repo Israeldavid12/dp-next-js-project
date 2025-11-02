@@ -18,6 +18,7 @@ export default function SalesPage() {
     const [balance, setBalance] = useState(null)
     const [salesCount, setSalesCount] = useState(0)
     const [query_time, setQueryTime] = useState('all')
+    const [query_status, setQueryStatus] = useState('completed')
     const token = localStorage.getItem('sessionToken')
     const [isActiveServer, setIsActiveServer] = useState(true)
 
@@ -34,7 +35,8 @@ export default function SalesPage() {
                 });
                 const salesReq = axios.get(apiUrl + '/api/user/sales', {
                     params: {
-                        query_time: query_time
+                        query_time: query_time,
+                        status_filter: "completed"
                     },
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -98,7 +100,7 @@ export default function SalesPage() {
             </div>
 
             {sales && sales.length !== 0 ? (
-                <ListSales sales={sales} setQueryTime={setQueryTime} query_time={query_time} />
+                <ListSales sales={sales} setQueryTime={setQueryTime} query_time={query_time} query_status={query_status} />
             )
                 :
                 (

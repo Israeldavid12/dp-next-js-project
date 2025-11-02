@@ -35,6 +35,14 @@ export default function Register() {
         }
       });
 
+       const is_pending = req.data.is_pending;
+
+      if (is_pending) {
+        router.push('/auth/account_pending');
+        return;
+      }
+
+
       console.log(req.data)
       setError(req.data.message)
       if (req.data.token) {
