@@ -38,7 +38,7 @@ export default function Login() {
       if (is_pending) {
         router.push('/auth/account_pending');
         return;
-      }
+      } 
 
       if (token) {
         localStorage.setItem('sessionToken', token)
