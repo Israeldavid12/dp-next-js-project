@@ -7,6 +7,7 @@ import emolaIcon from '../../../../public/images/emola.png';
 import MpesaIcon from '../../../../public/images/mpesa.png';
 import PaypalIcon from '../../../../public/images/paypal.png'
 import Image from 'next/image';
+import { formatCurrency } from '@/app/lib/utils';
 import { useRouter } from 'next/navigation';
 
 
@@ -63,9 +64,9 @@ export default function FinancesStatus({ summary }) {
                         </div>
 
                         {summary?.mpesa_emola !== undefined ? (
-                            <p className='text-[20px] text-green-700'>
+                            <p className='text-[20px] text-green-700 font-bold'>
                                 <span ref={saldo2Ref}>
-                                    {(summary?.mpesa_emola).toLocaleString('pt-MZ', { minimumFractionDigits: 2 }) + ' MT'}
+                                    {formatCurrency(summary?.mpesa_emola)}
                                 </span> <i onClick={() => {
                                     toggleClass(2);
                                     toggleSaldo(isActive2, 'saldo2');
@@ -82,9 +83,9 @@ export default function FinancesStatus({ summary }) {
                             <Image className='w-8 h-8 rounded-sm' src={PaypalIcon} alt='mpesaicone' />
                         </div>
                         {summary?.paypal !== undefined ? (
-                            <p className='text-[20px] text-green-700'>
+                            <p className='text-[20px] text-green-700 font-bold'>
                                 <span ref={saldo1Ref}>
-                                    {(summary?.paypal).toLocaleString('pt-MZ', { minimumFractionDigits: 2 }) + ' MT'}
+                                    {formatCurrency(summary?.paypal)}
                                 </span>  <i onClick={() => {
                                     toggleClass(1);
                                     toggleSaldo(isActive, 'saldo1');

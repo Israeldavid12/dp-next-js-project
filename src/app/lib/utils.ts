@@ -47,3 +47,14 @@ export async function checkActivation(type: string) {
   }
 }
 
+
+
+export function formatCurrency(value: number) {
+  if (isNaN(value)) {
+    value = 0;
+  }
+  return new Intl.NumberFormat('pt-MZ', {
+    style: 'currency',
+    currency: 'MZN',
+  }).format(value);
+}  

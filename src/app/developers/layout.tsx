@@ -23,29 +23,35 @@ const Layout = ({ children }) => {
               className="bg-gray-800  w-[100%] h-full "
             >
               <div className="bg-gray-800 text-white p-6 sm:hidden w-[100%] grid gap-3" >
-                  <a href="/developers">
-              <p className={`py-2 px-4 rounded-full bg-gray-800/70  hover:ring ring-[silver] cursor-pointer hidden  ${path === '/developers' ? 'ring' : ''}`} >
-                Home
-              </p>
-            </a>
+                <a href="/developers">
+                  <p className={`py-2 px-4 rounded-full bg-gray-800/70  hover:ring ring-[silver] cursor-pointer hidden  ${path === '/developers' ? 'ring' : ''}`} >
+                    Home
+                  </p>
+                </a>
 
-            <a href="/developers/home">
-              <p className={`py-2 px-4 rounded-full bg-gray-800/70  hover:ring ring-[silver] cursor-pointer   ${path === '/developers/home' ? 'ring' : ''}`} >
-                Home
-              </p>
-            </a>
+                <a href="/developers/home">
+                  <p className={`py-2 px-4 rounded-full bg-gray-800/70  hover:ring ring-[silver] cursor-pointer   ${path === '/developers/home' ? 'ring' : ''}`} >
+                    Home
+                  </p>
+                </a>
 
-            <a href="/developers/docs">
-              <p className={`py-2 px-4 rounded-full bg-gray-800/70  hover:ring ring-[silver] cursor-pointer   ${path === '/developers/docs' ? 'ring' : ''}`} >
-                Documentation
-              </p>
-            </a>
+                <a href="/developers/meta-pixel">
+                  <p className={`py-2 px-4 rounded-full bg-gray-800/70  hover:ring ring-[silver] cursor-pointer   ${path === '/developers/home' ? 'ring' : ''}`} >
+                    Meta Pixel - CAPI
+                  </p>
+                </a>
 
-            <a href="/developers/support">
-              <p className={`py-2 px-4 rounded-full bg-gray-800/70  hover:ring ring-[silver] cursor-pointer   ${path === '/developers/support' ? 'ring' : ''}`} >
-                Support
-              </p>
-            </a> 
+                <a href="/developers/docs">
+                  <p className={`py-2 px-4 rounded-full bg-gray-800/70  hover:ring ring-[silver] cursor-pointer   ${path === '/developers/docs' ? 'ring' : ''}`} >
+                    Documentation
+                  </p>
+                </a>
+
+                <a href="/developers/support">
+                  <p className={`py-2 px-4 rounded-full bg-gray-800/70  hover:ring ring-[silver] cursor-pointer   ${path === '/developers/support' ? 'ring' : ''}`} >
+                    Support
+                  </p>
+                </a>
               </div>
             </motion.div>
 
@@ -70,6 +76,13 @@ const Layout = ({ children }) => {
             <a href="/developers/home">
               <p className={`py-2 px-4 rounded-full bg-gray-800/70  hover:ring ring-[silver] cursor-pointer   ${path === '/developers/home' ? 'ring' : ''}`} >
                 Home
+              </p>
+            </a>
+
+
+            <a href="/developers/meta-pixel">
+              <p className={`py-2 px-4 rounded-full bg-gray-800/70  hover:ring ring-[silver] cursor-pointer   ${path === '/developers/home' ? 'ring' : ''}`} >
+                <i className="bi bi-meta"></i> Meta Pixel - CAPI
               </p>
             </a>
 

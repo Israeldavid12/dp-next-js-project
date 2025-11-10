@@ -4,8 +4,8 @@ import { useEffect, useState } from "react"
 import { Loading } from "../_components/LoadindAnim"
 import { ShoppingCart } from "lucide-react"
 import ListSales from './_components/ListSales'
+import { formatCurrency } from "../../lib/utils"
 const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
-
 
 
 
@@ -21,7 +21,7 @@ export default function SalesPage() {
     const [query_status, setQueryStatus] = useState('completed')
     const token = localStorage.getItem('sessionToken')
     const [isActiveServer, setIsActiveServer] = useState(true)
-
+ 
     useEffect(() => {
 
         const fechData = async () => {
@@ -36,7 +36,7 @@ export default function SalesPage() {
                 const salesReq = axios.get(apiUrl + '/api/user/sales', {
                     params: {
                         query_time: query_time,
-                        status_filter: "completed"
+                        status_filter: query_status
                     },
                     headers: {
                         Authorization: `Bearer ${token}`
@@ -63,7 +63,7 @@ export default function SalesPage() {
         fechData()
 
 
-    }, [query_time, token])
+    }, [query_time, token, query_status])
 
 
     if (!isActiveServer) {
@@ -95,12 +95,14 @@ export default function SalesPage() {
                 </div>
                 <div className="bg-white grid -gap-2 rounded-md p-5 w-full text-[12px] ">
                     <p>Valor líquido <i className="bi bi-info-circle-fill"></i></p>
-                    <span id="sales-made" className="text-[23px] text-green-700" >{balance + ' MT'}</span>
+                    <span id="sales-made" className="text-[23px] text-green-700 font-bold">
+                        {balance !== null ? formatCurrency(balance) : formatCurrency(0)}
+                    </span>
                 </div>
             </div>
 
             {sales && sales.length !== 0 ? (
-                <ListSales sales={sales} setQueryTime={setQueryTime} query_time={query_time} query_status={query_status} />
+                <ListSales sales={sales} setQueryTime={setQueryTime} query_time={query_time} query_status={query_status} setQueryStatus={setQueryStatus} />
             )
                 :
                 (

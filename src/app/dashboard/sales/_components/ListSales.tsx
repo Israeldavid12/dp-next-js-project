@@ -146,7 +146,7 @@ const TransactionDetails = ({ transaction }) => {
 
 
 
-export default function ListSales({ sales, setQueryTime, query_time, query_status }) {
+export default function ListSales({ sales, setQueryTime, query_time, query_status, setQueryStatus }) {
     const router = useRouter();
     const searchParams = useSearchParams();
     const pathname = usePathname();
@@ -197,6 +197,20 @@ export default function ListSales({ sales, setQueryTime, query_time, query_statu
                     <option value="month">Este mês</option>
                     <option value="last_month">Mês passado</option>
                     <option value="year">Este ano</option>
+                </select>
+                 
+                 <p className="mb-2 text-sm font-semibold text-gray-700 mt-6">Estado:</p>
+                <select
+                    value={query_status}
+                    onChange={(e) => setQueryStatus(e.target.value)}
+                    name="status" id="status-filter"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                     <option disabled value="a">----------</option>
+                    <option value="completed">Completado</option>
+                    <option value="pending">Pendente</option>
+                    <option value="failed">Falha</option>
+                    <option value="all">Todos estados</option>
+                    
                 </select>
             </div>
 
