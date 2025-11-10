@@ -2,12 +2,11 @@ import React from "react";
 import Image from "next/image";
 import logo from '../../../../public/images/fb-pixel.png';
 
-const MetaPixelLayout = ({ children }: { children: React.ReactNode }) => {
+export default function MetaPixelLayout() {
     return (
         <div className="p-9 text-gray-500  gap-5 flex flex-col bg-white " >
             <p>Configuração de Pixel</p>
             <Image src={logo} alt="Meta Pixel Logo" className="" />
-            {children}
             <p>ID do Pixel do Facebook</p>
 
             <input
@@ -30,4 +29,3 @@ const MetaPixelLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
     )
 }
-export default MetaPixelLayout;
