@@ -24,7 +24,9 @@ export default function RootLayout({ children }) {
       <head>
         <title>Drop Pay</title>
         <meta name="description" content="Drop Payments." />
+        <meta name="facebook-domain-verification" content="m9lhexr65migrozujswi9cvefbcfpf" />
         <link rel="icon" href={Logo.src} />
+
 
         {/* Bootstrap Icons CDN */}
         <link
