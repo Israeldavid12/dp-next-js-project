@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
         <meta name="facebook-domain-verification" content="m9lhexr65migrozujswi9cvefbcfpf" />
         <link rel="icon" href={Logo.src} />
 
-        {/* Bootstrap Icons CDN */}
+        {/* Bootstrap Icons CDN */} 
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
