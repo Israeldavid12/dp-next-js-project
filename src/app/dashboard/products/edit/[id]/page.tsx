@@ -56,7 +56,7 @@ export default function EditProduct() {
       const req = await axios.post(apiUrl + '/api/products/update', {
         id,
         ...data
-      }, {
+      }, {  
         headers: {
           Authorization: `Bearer ${token}`
         }
