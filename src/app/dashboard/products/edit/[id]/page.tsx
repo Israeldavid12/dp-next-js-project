@@ -55,7 +55,7 @@ export default function EditProduct() {
       const token = localStorage.getItem('sessionToken')
       const req = await axios.post(apiUrl + '/api/products/update', {
         id,
-        ...data
+        ...data   
       }, {  
         headers: {
           Authorization: `Bearer ${token}`
