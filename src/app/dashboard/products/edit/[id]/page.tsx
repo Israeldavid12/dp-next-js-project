@@ -49,7 +49,7 @@ export default function EditProduct() {
     data.payer_name_field = payer_name_field
     data.payer_contact_field = payer_contact_field
 
-
+  
     try {
       setActive(false)
       const token = localStorage.getItem('sessionToken')
