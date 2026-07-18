@@ -183,6 +183,16 @@ export default function EditProduct() {
                     rows={4}
                     placeholder="Descreva as características do produto..."
                   />
+
+                  <textarea
+                    name="acess_url"
+                    onChange={()=> setActive(true)}
+                    defaultValue={p_data.acess_url}
+                    maxLength={700}
+                    className="w-full px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all hover:border-gray-400 resize-none"
+                    rows={4}
+                    placeholder="Conteudo do produto"
+                  />
                 </div>
 
                 <PayerNameToggle p_data={p_data} setActive={setActive} />
