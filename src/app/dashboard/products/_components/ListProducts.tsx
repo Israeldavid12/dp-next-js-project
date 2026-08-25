@@ -103,7 +103,7 @@ export default function ListProducts() {
                                     <p className='font-bold text-start text-[14px]' >{product.name}</p>
                                     <ActionMenu id={product.id} />
                                 </div>
-                                <img className='h-full w-full rounded-md' src={product.image_url} alt="image" />
+                                <img className='h-full w-full rounded-md' src={`https://pub-8388501bac324f07b570765387d76c70.r2.dev${new URL(product.image_url).pathname}`} alt="image" />
                                 <p className='text-xs' >ID: {product.id}</p>
                                 <p className='text-xs font-bold text-green-700' >{product.price} MT</p>
                                 <ProductStatus status={product.status} />
