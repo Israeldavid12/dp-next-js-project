@@ -4,7 +4,8 @@ import axios from "axios";
 import WithdrawPopUp from './_components/WithdrawModal'
 import { Loading } from "../_components/LoadindAnim"
 import { Search } from "lucide-react";
-const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_BASE_API_URL
+console.log(apiUrl)
 
 
 
@@ -63,7 +64,7 @@ function Listwithdraw({ withdraw, limit = 10 }) {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
-                        {[...withdraw].reverse().slice(0, limit).map((withdraw) => (
+                        {[...withdraw].slice(0, limit).map((withdraw) => (
                             <tr key={withdraw.id} className="hover:bg-gray-50 ">
                                 <td className="px-4 py-2">{withdraw.requested_amount || 'N/A'}</td>
                                 {/* <td className="px-4 py-2">{withdraw.amount_receive || 'N/A'}</td> */}

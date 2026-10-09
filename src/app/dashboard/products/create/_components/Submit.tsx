@@ -30,6 +30,7 @@ async function setAssetsProduct(banner_file, image_file) {
         formDataBanner.append('dir', 'banners');
 
         const URL_ENDPOINT = 'https://file.droopay.com/api/upload/images';
+        // 'http://localhost:5002/api/upload/images'
 
         const req_image = axios.post(URL_ENDPOINT, formDataImage, {
             headers: {
@@ -72,7 +73,7 @@ async function setEbook(ebook_file) {
         const formData = new FormData();
         formData.append('file', ebook_file);
 
-        // const URL_ENDPOINT = 'https://file.droopay.com/api/upload/doc';
+        // const URL_ENDPOINT = 'https://file.droopay.com/api/upload/docs';
 
         const response = await axios.post('https://file.droopay.com/api/upload/docs', formData, {
             headers: {
