@@ -37,7 +37,7 @@ export async function handleCreateProduct(formData, assets, accessUrl) {
                 data: req.data
             }
         }
-
+   
     } catch (e) {
         console.log(e)
         return {
